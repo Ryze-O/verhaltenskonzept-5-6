@@ -6,57 +6,49 @@
 <meta name="robots" content="noindex,nofollow"><title>Materialpaket Zeitsparer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Fira+Sans:wght@400;500;600;700&display=swap">
 
 <style>
 :root{
-  --bg:#EEF1F1; --surface:#FFFFFF; --ink:#16211F; --ink-2:#54625F; --ink-3:#849491;
-  --accent:#0F6B63; --accent-ink:#0B524C; --accent-soft:#DCEBE8; --rule:#D2DBD9;
-  --f-display:"Newsreader",Georgia,serif;
-  --f-body:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+  /* Namen bleiben, damit die uebrige Bildschirm-CSS unveraendert greift.
+     Werte auf hohen Kontrast umgestellt, kein Dark Mode. */
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#111111; --ink-2:#333333; --ink-3:#4A4A4A;
+  --accent:#0B3D91; --accent-ink:#0B3D91; --accent-soft:#FFFFFF; --rule:#C9C9C9;
+  --f-display:"Literata",Georgia,"Times New Roman",serif;
+  --f-body:"Literata",Georgia,"Times New Roman",serif;
+  --f-mono:"Fira Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0E1514; --surface:#161F1E; --ink:#E4EDEB; --ink-2:#9BAAA7; --ink-3:#71827F;
-    --accent:#54C2B1; --accent-ink:#7BD6C6; --accent-soft:#173733; --rule:#2A3735;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0E1514; --surface:#161F1E; --ink:#E4EDEB; --ink-2:#9BAAA7; --ink-3:#71827F;
-  --accent:#54C2B1; --accent-ink:#7BD6C6; --accent-soft:#173733; --rule:#2A3735;
-}
-
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.6}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:20px;line-height:1.8}
 
 /* ================= Seitenrahmen (nur Bildschirm) ================= */
 .chrome{max-width:960px;margin:0 auto;padding:56px 24px 40px}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.eyebrow{font-family:var(--f-mono);font-size:16px;font-weight:600;color:var(--ink-2);margin-bottom:20px}
 h1{font-family:var(--f-display);font-weight:500;font-size:clamp(34px,5.5vw,56px);line-height:1.05;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
-.dek{font-size:18px;color:var(--ink-2);max-width:62ch;margin:0 0 32px}
+.dek{font-size:1.1rem;color:var(--ink);max-width:60ch;margin:0 0 32px;line-height:1.7}
 
 .druckhinweis{
   background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);
-  border-radius:0 8px 8px 0;padding:18px 22px;margin-bottom:36px;max-width:70ch;
+  border-radius:0;padding:4px 0 4px 22px;margin-bottom:36px;max-width:66ch;border-width:0 0 0 4px;
 }
-.druckhinweis .titel{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.druckhinweis .titel{font-family:var(--f-mono);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:9px}
 .druckhinweis ol{margin:0;padding-left:20px}
-.druckhinweis li{margin-bottom:5px;font-size:15px}
+.druckhinweis li{margin-bottom:8px;font-size:1rem;line-height:1.6}
 .druckhinweis b{font-weight:600}
-kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:4px;border:1px solid var(--rule)}
+kbd{font-family:var(--f-mono);font-size:.85em;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--ink-3);border-bottom-width:2px;padding:.1em .45em;border-radius:3px}
 
 .inhalt{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-bottom:12px}
-.inhalt a{
+.inhalt a{border-radius:0;
   display:flex;gap:12px;align-items:flex-start;
   background:var(--surface);border:1px solid var(--rule);border-radius:7px;
   padding:13px 15px;text-decoration:none;color:var(--ink);
 }
 .inhalt a:hover{border-color:var(--accent)}
 .inhalt a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.inhalt .n{font-family:var(--f-mono);font-size:12px;color:var(--accent);padding-top:2px}
-.inhalt .t{font-weight:600;font-size:14.5px;line-height:1.35}
-.inhalt .f{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);margin-top:2px}
+.inhalt .n{font-family:var(--f-mono);font-size:1rem;font-weight:700;color:var(--accent);padding-top:2px}
+.inhalt .t{font-family:var(--f-mono);font-weight:600;font-size:1.05rem;line-height:1.35;color:var(--accent)}
+.inhalt .f{font-family:var(--f-mono);font-size:15px;color:var(--ink-2);margin-top:3px}
 
 /* Bezeichner über jedem Blatt */
 .blattkopf{
@@ -64,8 +56,8 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
   display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
 }
 .blattkopf h2{font-family:var(--f-display);font-weight:500;font-size:24px;margin:0;letter-spacing:-.01em}
-.blattkopf .fmt{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
-.blattkopf .tip{font-size:13.5px;color:var(--ink-2);flex-basis:100%;margin:0}
+.blattkopf .fmt{font-family:var(--f-mono);font-size:15px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.blattkopf .tip{font-size:1rem;color:var(--ink);flex-basis:100%;margin:0;line-height:1.6;max-width:62ch}
 
 .buehne{overflow-x:auto;padding:0 24px 8px}
 
