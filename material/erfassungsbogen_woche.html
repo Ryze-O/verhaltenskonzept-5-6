@@ -65,7 +65,7 @@
 
   td.datum, td.fach { text-align: left; padding: 0 1.5mm; }
 
-  tbody tr { height: 13mm; }
+  tbody tr { height: 11.5mm; }
   tbody tr:nth-child(even) { background: #f7f7f7; }
 
   /* Foul-Kästchen */
@@ -98,7 +98,9 @@
     font-size: 8.5pt;
     line-height: 1.45;
   }
-  .kasten b { display: block; font-size: 8pt; letter-spacing: 0.3pt; color: #444; margin-bottom: 1mm; text-transform: uppercase; }
+  /* NUR die Kastenueberschrift - ein blosses ".kasten b" wuerde jede Hervorhebung
+     im Fliesstext zum Block in Versalien machen und die Saetze zerreissen. */
+  .kasten b.titel { display: block; font-size: 8pt; letter-spacing: 0.3pt; color: #444; margin-bottom: 1mm; text-transform: uppercase; }
   .anleitung { flex: 2; }
   .summe { flex: 1; background: #f2f2f2; }
   .summe .zeile { display: flex; justify-content: space-between; padding: 0.8mm 0; border-bottom: 0.5pt dotted #aaa; }
@@ -109,6 +111,14 @@
 
   .anleitung ol { margin: 0; padding-left: 4mm; }
   .anleitung li { margin-bottom: 0.6mm; }
+
+  /* Im Druck sorgt bereits @page fuer den Rand - body-Padding wuerde ihn verdoppeln
+     und den Bogen auf eine zweite Seite schieben. */
+  @media print {
+    body { padding: 0; }
+    .sheet { max-width: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
 
   @media screen {
     body { background: #ccc; padding: 10mm; }
@@ -229,7 +239,7 @@
 
   <footer>
     <div class="kasten anleitung">
-      <b>So geht's &mdash; 30 Sekunden pro Stunde</b>
+      <b class="titel">So geht's &mdash; 30 Sekunden pro Stunde</b>
       <ol>
         <li>Ansagen: &bdquo;Wir spielen jetzt <u>&nbsp;&nbsp;&nbsp;&nbsp;</u> Minuten das KlasseKinderSpiel.&ldquo;</li>
         <li>Regelverstoß? <b>Wortlos ein Kästchen ankreuzen</b> beim Team. Kein Kommentar, kein Name.</li>
@@ -239,7 +249,7 @@
     </div>
 
     <div class="kasten hinweis">
-      <b>Nicht vergessen</b>
+      <b class="titel">Nicht vergessen</b>
       <div>&bull; Alle Teams können <b>gleichzeitig</b> gewinnen &mdash; sie spielen gegen das Limit, nicht gegeneinander.</div>
       <div>&bull; <b>Kein Kind</b> wird von der Belohnung ausgeschlossen.</div>
       <div>&bull; Punkte gibt es <b>nur für Verhalten</b>, nie für Leistung.</div>
@@ -247,7 +257,7 @@
     </div>
 
     <div class="kasten summe">
-      <b>Zeitsparer</b>
+      <b class="titel">Zeitsparer</b>
       <div class="zeile"><span>Übertrag Vorwoche</span><span class="wert"></span></div>
       <div class="zeile"><span>Diese Woche</span><span class="wert"></span></div>
       <div class="zeile"><span>Eingelöst</span><span class="wert"></span></div>

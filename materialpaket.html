@@ -77,22 +77,49 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
   margin:0 auto;padding:12mm;
   box-shadow:0 2px 14px rgba(0,0,0,.28);
 }
-.blatt.a4hoch{width:210mm;min-height:297mm;font-size:10pt}
-.blatt.a4quer{width:297mm;min-height:210mm;font-size:10pt;padding:8mm}
+.blatt.a4hoch{width:210mm;min-height:297mm;font-size:9.5pt}
+.blatt.a4quer{width:297mm;min-height:210mm;font-size:9.5pt;padding:8mm}
 .blatt.a3hoch{width:297mm;min-height:420mm;font-size:12pt}
 .blatt *{box-sizing:border-box}
 .blatt h3,.blatt h4{font-family:inherit}
 
-@media print{
-  @page hoch{size:A4 portrait;margin:11mm}
-  @page quer{size:A4 landscape;margin:8mm}
-  @page poster{size:A3 portrait;margin:12mm}
+@media print{  /* Auffangregel: alles, was keinem benannten Format zugeordnet ist, bekommt A4 -
+     ohne sie faellt der Druck auf den Werksstandard (US Letter) zurueck. */
+  /* Rand macht das Bogen-Padding, nicht der Seitenrand: so ist ein Bogen exakt
+     eine Seite. Mit Seitenrand PLUS Bogenbreite waere der Inhalt breiter als die
+     Seite, und der Druck haette ihn stillschweigend herunterskaliert. */
+  @page{size:A4 portrait;margin:0}   /* Standardseite: traegt das Deckblatt */
+  @page hoch{size:A4 portrait;margin:0}
+  @page quer{size:A4 landscape;margin:0}
+  @page poster{size:A3 portrait;margin:0}
+
+  /* Hintergruende mitdrucken, ohne dass jemand die Checkbox im Druckdialog findet */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
   body{background:#fff}
   .chrome,.blattkopf{display:none !important}
-  .buehne{overflow:visible;padding:0}
-  .blatt{box-shadow:none;margin:0;padding:0;width:auto;min-height:0;break-after:page}
-  .blatt:last-child{break-after:auto}
+  /* display:contents nimmt den Container aus dem Box-Baum. Sonst beginnt er eine
+     Seite im Standardformat, bevor sein Bogen auf quer/A3 umschaltet - das ergibt
+     eine leere Seite vor dem ersten Bogen. */
+  .buehne{display:contents}
+  /* Spezifitaet: .blatt.a4hoch (2 Klassen) schlaegt ein blosses .blatt - die
+     Bildschirmmasse muessen hier mit gleicher Spezifitaet zurueckgenommen werden,
+     sonst behaelt jeder Bogen im Druck width:210mm und min-height:297mm. */
+  /* Gleiche Spezifitaet wie .blatt.a4hoch - sonst greift die Ruecknahme nicht. */
+  /* Umbruch VOR jedem Bogen ausser dem ersten. Mit break-after wuerde beim
+     Formatwechsel (A3 -> A4) zusaetzlich zum ohnehin erzwungenen Umbruch ein
+     zweiter entstehen - und damit eine leere Seite. */
+  .blatt,
+  .blatt.a4hoch,.blatt.a4quer,.blatt.a3hoch{
+    box-shadow:none;margin:0;break-before:auto;break-after:auto
+  }
+  /* 1mm unter Seitenmass: ein Block von exakt Seitenhoehe kippt durch
+     Sub-Pixel-Rundung auf eine leere Folgeseite. */
+  .blatt.a4hoch{width:210mm;height:296mm;min-height:0;padding:12mm}
+  .blatt.a4quer{width:297mm;height:209mm;min-height:0;padding:9mm}
+  .blatt.a3hoch{width:297mm;height:419mm;min-height:0;padding:12mm}
+  /* NICHT .blatt:last-child - jeder Bogen ist einziges Kind seiner Buehne und waere
+     damit last-child; die Umbrueche zwischen gleichformatigen Boegen entfielen. */
   .blatt.a4hoch{page:hoch}
   .blatt.a4quer{page:quer}
   .blatt.a3hoch{page:poster}
@@ -108,7 +135,7 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
 .p-meta span{border-bottom:1pt solid #111;display:inline-block;min-width:28mm}
 .p-meta label{font-weight:600;margin-right:1.5mm}
 
-.lin{border-bottom:1pt solid #999;height:6mm}
+.lin{border-bottom:1pt solid #999;height:5mm}
 .fill{border-bottom:1pt solid #999;display:inline-block;min-width:30mm}
 
 .p-kasten{border:1.5pt solid #999;border-radius:2.5mm;padding:4mm 5mm;font-size:9.5pt;line-height:1.55}
@@ -119,7 +146,7 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
 .p-kasten > *:last-child{margin-bottom:0}
 
 .p-tab{width:100%;border-collapse:collapse;font-size:9.5pt}
-.p-tab th,.p-tab td{border:.75pt solid #666;padding:2mm 2.5mm;text-align:left;vertical-align:top}
+.p-tab th,.p-tab td{border:.75pt solid #666;padding:1.6mm 2.5mm;text-align:left;vertical-align:top}
 .p-tab thead th{background:#eee;font-size:8.5pt;text-transform:uppercase;letter-spacing:.5pt}
 .p-tab tbody th{background:#f6f6f6;font-weight:600;width:26mm}
 
@@ -131,7 +158,7 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
 .wb th,.wb td{border:.75pt solid #666;padding:0;text-align:center}
 .wb thead th{background:#eee;font-size:8.5pt;padding:1.5mm 1mm;font-weight:600}
 .wb thead th.team{background:#ddd}
-.wb tbody tr{height:13mm}
+.wb tbody tr{height:10mm}
 .wb tbody tr:nth-child(even){background:#f7f7f7}
 .wb td.txt{text-align:left;padding:0 1.5mm}
 .fouls{display:flex;justify-content:center;gap:1.2mm}
@@ -187,24 +214,24 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
 .am-stufe small{display:block;font-weight:400;font-size:7.5pt;margin-top:.5mm}
 .s-weiss{background:#fff}.s-gelb{background:#fde047}.s-orange{background:#fb923c}
 .s-rot{background:#ef4444;color:#fff}.s-rot small{color:#ffe4e4}
-.am-zeile{display:flex;height:8.4mm}
+.am-zeile{display:flex;height:7.1mm}
 .am-zeile .name{width:52mm;flex-shrink:0;border:.5pt solid #bbb;border-top:none}
 .am-zeile .f{flex:1;border:.5pt solid #bbb;border-top:none;border-left:none}
 .am-zeile:first-child .name,.am-zeile:first-child .f{border-top:.5pt solid #bbb}
 .f-weiss{background:#fff}.f-gelb{background:#fef9c3}.f-orange{background:#ffedd5}.f-rot{background:#fee2e2}
 
 /* ---------- Vereinbarung ---------- */
-.vb-zeile{display:flex;gap:5mm;margin-bottom:3mm}
+.vb-zeile{display:flex;gap:5mm;margin-bottom:2.5mm}
 .vb-f{flex:1}
 .vb-f label{display:block;font-size:8pt;color:#6b7280;font-weight:600;letter-spacing:.5pt;text-transform:uppercase;margin-bottom:1mm}
-.vb-ziel{display:flex;gap:3mm;align-items:flex-start;margin-bottom:3.5mm}
+.vb-ziel{display:flex;gap:3mm;align-items:flex-start;margin-bottom:2.5mm}
 .vb-ziel .nr{flex-shrink:0;width:6.5mm;height:6.5mm;border-radius:50%;background:#111;color:#fff;font-weight:700;font-size:8.5pt;display:flex;align-items:center;justify-content:center;margin-top:.5mm}
-.vb-ziel .l{flex:1;border-bottom:1pt solid #999;height:7.5mm}
-.vb-unter{display:flex;gap:6mm;margin-top:8mm}
+.vb-ziel .l{flex:1;border-bottom:1pt solid #999;height:6.5mm}
+.vb-unter{display:flex;gap:6mm;margin-top:4mm}
 .vb-unter .u{flex:1}
-.vb-unter .strich{border-bottom:1pt solid #111;height:12mm}
+.vb-unter .strich{border-bottom:1pt solid #111;height:9mm}
 .vb-unter .wer{font-size:8.5pt;color:#555;margin-top:1.5mm}
-.karte{border:1.5pt dashed #666;border-radius:2.5mm;padding:4mm 5mm;margin-bottom:6mm;height:78mm;display:flex;flex-direction:column}
+.karte{border:1.5pt dashed #666;border-radius:2.5mm;padding:4mm 5mm;margin-bottom:4mm;height:70mm;display:flex;flex-direction:column}
 .karte .kkopf{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1pt solid #ccc;padding-bottom:2mm;margin-bottom:3mm;gap:6mm}
 .karte .kkopf .t{font-size:12pt;font-weight:700}
 .karte .kkopf .m{font-size:8.5pt;color:#555}
@@ -217,19 +244,19 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
 .schere{text-align:center;color:#999;font-size:8pt;letter-spacing:3pt;margin:-3mm 0 3mm}
 
 /* ---------- Schülerinfo ---------- */
-.si-kopf{text-align:center;margin-bottom:8mm}
+.si-kopf{text-align:center;margin-bottom:5mm}
 .si-titel{font-size:34pt;margin:2mm 0 0;letter-spacing:-1pt;line-height:1.05;font-weight:700}
 .si-unter{font-size:13pt;color:#444;margin-top:3mm}
-.si-schritt{display:flex;gap:5mm;align-items:flex-start;margin-bottom:5mm}
+.si-schritt{display:flex;gap:5mm;align-items:flex-start;margin-bottom:3.5mm}
 .si-nr{flex-shrink:0;width:11mm;height:11mm;border-radius:50%;background:#111;color:#fff;font-weight:700;font-size:15pt;display:flex;align-items:center;justify-content:center}
 .si-schritt .txt{padding-top:1.5mm;font-size:12pt;line-height:1.5}
 .si-schritt b{display:block;font-size:13pt;margin-bottom:1mm}
-.si-knaller{border:3pt solid #111;border-radius:4mm;background:#fffbeb;padding:6mm 7mm;text-align:center;margin:8mm 0}
+.si-knaller{border:3pt solid #111;border-radius:4mm;background:#fffbeb;padding:5mm 7mm;text-align:center;margin:5mm 0}
 .si-knaller .gross{font-size:21pt;font-weight:700;line-height:1.25}
 .si-knaller .klein{font-size:12pt;color:#444;margin-top:3mm}
-.si-frage{border-left:3.5pt solid #111;padding-left:5mm;margin-bottom:5mm;font-size:12pt;line-height:1.5}
+.si-frage{border-left:3.5pt solid #111;padding-left:5mm;margin-bottom:3.5mm;font-size:11pt;line-height:1.45}
 .si-frage b.q{display:block;font-size:13pt;margin-bottom:1mm}
-.si-rechnung{display:flex;align-items:center;justify-content:center;gap:5mm;border:1.5pt solid #999;border-radius:3mm;padding:5mm;margin:5mm 0;background:#fafafa;flex-wrap:wrap}
+.si-rechnung{display:flex;align-items:center;justify-content:center;gap:5mm;border:1.5pt solid #999;border-radius:3mm;padding:4mm;margin:4mm 0;background:#fafafa;flex-wrap:wrap}
 .si-rechnung .k{text-align:center}
 .si-rechnung .zahl{font-size:24pt;font-weight:700;line-height:1.1}
 .si-rechnung .wort{font-size:10pt;color:#555}
@@ -248,7 +275,8 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
     <div class="titel">Vor dem Drucken</div>
     <ol>
       <li><kbd>Strg</kbd> + <kbd>P</kbd> drücken (Mac: <kbd>Cmd</kbd> + <kbd>P</kbd>).</li>
-      <li><b>„Hintergrundgrafiken"</b> unter <i>Weitere Einstellungen</i> aktivieren — sonst fehlen die Ampelfarben und die grauen Tabellenköpfe.</li>
+      <li><b>Seite 1 ist leer</b> — im Druckdialog <b>Seiten 2–11</b> eingeben. Das ist eine Eigenheit des Browsers, sobald ein Dokument A4 hoch, A4 quer und A3 mischt; einzeln gedruckt (Ordner <code>material/</code>) tritt es nicht auf.</li>
+      <li>Hintergrundfarben drucken automatisch mit. Falls euer Browser sie trotzdem weglässt: <b>„Hintergrundgrafiken"</b> unter <i>Weitere Einstellungen</i> aktivieren.</li>
       <li>Skalierung auf <b>100 %</b> stellen, nicht „an Seite anpassen".</li>
       <li>Poster und Verstärker-Menü brauchen <b>A3</b>. Ohne A3-Drucker im Druckdialog auf A4 verkleinern — bleibt lesbar, wirkt aber weniger.</li>
     </ol>
@@ -270,7 +298,7 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
   <h2>01 · Wochenblatt</h2><span class="fmt">A4 quer</span>
   <p class="tip">Das Arbeitspferd. Liegt im Klassenordner, ein Blatt pro Woche. Alles, was eine Fachlehrkraft im Unterricht braucht, steht drauf.</p>
 </div>
-<div class="buehne"><div class="blatt a4quer">
+<div class="buehne" id="ersteBuehne"><div class="blatt a4quer">
   <div class="p-kopf">
     <div>
       <div class="p-titel">KlasseKinderSpiel — Wochenblatt</div>
@@ -495,26 +523,26 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
     <div class="vb-f"><label>Gespräch am</label><div class="lin"></div></div>
   </div>
 
-  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Das nehme ich mir vor</h4>
+  <h4 style="font-size:11pt;margin:3.5mm 0 2.5mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Das nehme ich mir vor</h4>
   <div class="vb-ziel"><div class="nr">1</div><div class="l"></div></div>
   <div class="vb-ziel"><div class="nr">2</div><div class="l"></div></div>
   <div class="vb-ziel"><div class="nr">3</div><div class="l"></div></div>
   <div style="font-size:8.5pt;color:#666;font-style:italic;margin:-1mm 0 4mm 9.5mm">Positiv formuliert und beobachtbar. Beispiel: „Ich hole mein Material in den ersten zwei Minuten raus." — nicht: „Ich störe nicht."</div>
 
-  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Mein Tagesziel</h4>
+  <h4 style="font-size:11pt;margin:3.5mm 0 2.5mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Mein Tagesziel</h4>
   <div class="p-kasten gelb">
     <div class="titel">So viele Häkchen brauche ich pro Tag</div>
     <div style="font-size:13pt">Ich schaffe <span class="fill" style="min-width:16mm;border-bottom-width:1.5pt;border-color:#111">&nbsp;</span> von <span class="fill" style="min-width:16mm;border-bottom-width:1.5pt;border-color:#111">&nbsp;</span> Häkchen.</div>
     <div style="font-size:8.5pt;color:#666;margin-top:2.5mm"><b>Wichtig:</b> Das Ziel muss von Anfang an erreichbar sein. Wer bisher bei etwa 40 % liegt, startet nicht bei 90 %. Lieber niedrig ansetzen und später anheben.</div>
   </div>
 
-  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wenn ich mein Tagesziel schaffe</h4>
+  <h4 style="font-size:11pt;margin:3.5mm 0 2.5mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wenn ich mein Tagesziel schaffe</h4>
   <div class="vb-zeile">
     <div class="vb-f"><label>In der Schule</label><div class="lin"></div></div>
     <div class="vb-f"><label>Zu Hause</label><div class="lin"></div></div>
   </div>
 
-  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wie wir wieder aufhören</h4>
+  <h4 style="font-size:11pt;margin:3.5mm 0 2.5mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wie wir wieder aufhören</h4>
   <div class="p-kasten">
     <div style="line-height:1.7">
       <b>Woche 1–3:</b> Häkchen in jeder Stunde, Auswertung jeden Tag.<br>
@@ -531,7 +559,7 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
     <div class="u"><div class="strich"></div><div class="wer">Klassenleitung</div></div>
   </div>
 
-  <div style="margin-top:5mm;font-size:8pt;color:#777;line-height:1.6;border-top:1pt solid #ddd;padding-top:3mm">
+  <div style="margin-top:3mm;font-size:7.5pt;color:#777;line-height:1.45;border-top:1pt solid #ddd;padding-top:2mm">
     <b>Für die Lehrkräfte:</b> Ein Häkchen pro Ziel am Stundenende, etwa zehn Sekunden. Im Zweifel großzügig sein — die Karte soll Erfolge sichtbar machen, nicht Lücken dokumentieren.<br>
     <b>Die Karte gehört dem Kind.</b> Sie wird nicht ausgehängt, nicht herumgezeigt und nicht dort besprochen, wo Dritte mithören.<br>
     <b>Datenschutz:</b> Ausschließlich in Papierform. Keine Erfassung auf privaten Geräten oder online — individuelle Verhaltensdaten sind in Anlage 3 VO-DV I nicht als zulässig gelistet. Aufbewahrung verschlossen in der Schule.
@@ -577,7 +605,7 @@ kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);colo
     <div class="klein">Ihr spielt <b>nicht gegeneinander</b>. Ihr spielt alle zusammen gegen die vier Striche.</div>
   </div>
 </div></div>
-<div class="buehne"><div class="blatt a4hoch">
+<div class="buehne" id="letzteBuehne"><div class="blatt a4hoch">
   <div class="si-kopf">
     <div class="p-kicker">Was ihr bestimmt wissen wollt</div>
     <div class="si-titel">Eure Fragen</div>

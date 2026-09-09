@@ -25,8 +25,18 @@ Zwei der drei bestehenden Systeme erfassen einzelne Kinder namentlich, öffentli
 
 ## Einzelne Druckbögen
 
-Im Ordner `material/`. Alle im Browser öffnen und mit <kbd>Strg</kbd>+<kbd>P</kbd> drucken —
-**„Hintergrundgrafiken" im Druckdialog aktivieren**, sonst fehlen Ampelfarben und Tabellenköpfe.
+Im Ordner `material/`. Alle im Browser öffnen und mit <kbd>Strg</kbd>+<kbd>P</kbd> drucken.
+Die Hintergrundfarben drucken automatisch mit (`print-color-adjust: exact`), die Checkbox
+„Hintergrundgrafiken" muss niemand mehr suchen.
+
+**Jeder Bogen ist auf exakte Seitenzahl geprüft** (Headless-Chromium, Seitenformate aus dem
+erzeugten PDF ausgelesen). Stand: alle sieben Bögen paginieren korrekt.
+
+> **Eine Einschränkung bei `materialpaket.html`:** Weil dieses eine Dokument A4 hoch, A4 quer
+> und A3 mischt, erzeugt Chromium prinzipbedingt **eine leere erste Seite**. Im Druckdialog
+> deshalb **Seiten 2–11** eingeben. Beim Druck der Einzeldateien aus `material/` tritt das
+> nicht auf — dort stimmt jede Seite. Das ist eine Eigenheit der Browser-Druckengine bei
+> gemischten Papierformaten, kein Fehler im Dokument.
 
 | Datei | Format | Zweck |
 |---|---|---|

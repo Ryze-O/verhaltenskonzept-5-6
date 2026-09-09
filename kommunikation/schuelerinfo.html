@@ -12,16 +12,16 @@
   .seite { page-break-after: always; }
   .seite:last-child { page-break-after: auto; }
 
-  header { text-align: center; margin-bottom: 8mm; }
+  header { text-align: center; margin-bottom: 6mm; }
   .kicker { font-size: 10pt; letter-spacing: 2.5pt; text-transform: uppercase;
             color: #6b7280; font-weight: 700; }
   h1 { font-size: 34pt; margin: 2mm 0 0; letter-spacing: -1pt; line-height: 1.05; }
   .unter { font-size: 13pt; color: #444; margin-top: 3mm; }
 
-  h2 { font-size: 16pt; margin: 8mm 0 3mm; }
+  h2 { font-size: 16pt; margin: 6mm 0 3mm; }
 
   /* Schritte */
-  .schritt { display: flex; gap: 5mm; align-items: flex-start; margin-bottom: 5mm; }
+  .schritt { display: flex; gap: 5mm; align-items: flex-start; margin-bottom: 3.5mm; }
   .nr {
     flex-shrink: 0; width: 11mm; height: 11mm; border-radius: 50%;
     background: #111; color: #fff; font-weight: 700; font-size: 15pt;
@@ -34,19 +34,19 @@
   .knaller {
     border: 3pt solid #111; border-radius: 4mm;
     background: #fffbeb; padding: 6mm 7mm; text-align: center;
-    margin: 8mm 0;
+    margin: 6mm 0;
   }
   .knaller .gross { font-size: 21pt; font-weight: 700; line-height: 1.25; }
   .knaller .klein { font-size: 12pt; color: #444; margin-top: 3mm; }
 
   /* Fragen */
-  .frage { border-left: 3.5pt solid #111; padding-left: 5mm; margin-bottom: 5mm; }
+  .frage { border-left: 3.5pt solid #111; padding-left: 5mm; margin-bottom: 3.5mm; }
   .frage b { display: block; font-size: 13pt; margin-bottom: 1mm; }
 
   /* Rechnung */
   .rechnung {
     display: flex; align-items: center; justify-content: center; gap: 5mm;
-    border: 1.5pt solid #999; border-radius: 3mm; padding: 5mm; margin: 5mm 0;
+    border: 1.5pt solid #999; border-radius: 3mm; padding: 4mm; margin: 4mm 0;
     background: #fafafa; flex-wrap: wrap;
   }
   .rechnung .kasten { text-align: center; }
@@ -73,6 +73,8 @@
     .zurueck a:hover { text-decoration: underline; }
     .zurueck span { color: #555; }
   }
+  /* Hintergruende mitdrucken, ohne dass jemand die Checkbox im Druckdialog suchen muss */
+  @media print { * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 </style>
 </head>
 <body>

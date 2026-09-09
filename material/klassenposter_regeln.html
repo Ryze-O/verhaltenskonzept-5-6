@@ -74,6 +74,8 @@
     body { background: #ccc; padding: 15mm; }
     .sheet { background: #fff; padding: 15mm; box-shadow: 0 2px 16px rgba(0,0,0,.3); max-width: 297mm; margin: 0 auto; }
   }
+  /* Hintergruende mitdrucken, ohne dass jemand die Checkbox im Druckdialog suchen muss */
+  @media print { * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 </style>
 </head>
 <body>

@@ -7,7 +7,7 @@
   @page { size: A4 portrait; margin: 12mm; }
   * { box-sizing: border-box; }
 
-  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; font-size: 10pt; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; font-size: 9.5pt; }
 
   .seite { page-break-after: always; }
   .seite:last-child { page-break-after: auto; }
@@ -18,27 +18,27 @@
   h1 { font-size: 22pt; margin: 1mm 0 0; letter-spacing: -0.5pt; }
   .lead { font-size: 9.5pt; color: #555; margin-top: 2mm; }
 
-  h2 { font-size: 11pt; margin: 6mm 0 3mm; padding-bottom: 1.5mm;
+  h2 { font-size: 11pt; margin: 4mm 0 2.5mm; padding-bottom: 1.5mm;
        border-bottom: 1.5pt solid #d0d0d0; letter-spacing: 0.3pt; }
   h2:first-of-type { margin-top: 0; }
 
-  .zeile { display: flex; gap: 5mm; margin-bottom: 3mm; }
+  .zeile { display: flex; gap: 5mm; margin-bottom: 2.5mm; }
   .f { flex: 1; }
   .f label { display: block; font-size: 8pt; color: #6b7280; font-weight: 600;
              letter-spacing: 0.5pt; text-transform: uppercase; margin-bottom: 1mm; }
-  .f .lin { border-bottom: 1pt solid #999; height: 6mm; }
+  .f .lin { border-bottom: 1pt solid #999; height: 5.5mm; }
 
   /* Ziele */
-  .ziel { display: flex; gap: 3mm; align-items: flex-start; margin-bottom: 3.5mm; }
+  .ziel { display: flex; gap: 3mm; align-items: flex-start; margin-bottom: 2.5mm; }
   .ziel .nr { flex-shrink: 0; width: 6.5mm; height: 6.5mm; border-radius: 50%;
               background: #111; color: #fff; font-weight: 700; font-size: 8.5pt;
               display: flex; align-items: center; justify-content: center; margin-top: 0.5mm; }
-  .ziel .lin { flex: 1; border-bottom: 1pt solid #999; height: 7.5mm; }
+  .ziel .lin { flex: 1; border-bottom: 1pt solid #999; height: 7mm; }
 
   .tipp { font-size: 8.5pt; color: #666; font-style: italic; margin: -1mm 0 4mm 9.5mm; }
 
   /* Tagesziel-Kasten */
-  .kasten { border: 1.5pt solid #999; border-radius: 2.5mm; padding: 4mm 5mm; background: #fafafa; }
+  .kasten { border: 1.5pt solid #999; border-radius: 2.5mm; padding: 3mm 5mm; background: #fafafa; }
   .kasten.gelb { background: #fffbeb; border-color: #d4a72c; }
   .kasten .titel { font-size: 8.5pt; letter-spacing: 2pt; text-transform: uppercase;
                    color: #6b7280; font-weight: 700; margin-bottom: 2.5mm; }
@@ -48,18 +48,18 @@
                        min-width: 16mm; text-align: center; }
 
   /* Unterschriften */
-  .unter { display: flex; gap: 6mm; margin-top: 8mm; }
+  .unter { display: flex; gap: 6mm; margin-top: 4mm; }
   .unter .u { flex: 1; }
-  .unter .strich { border-bottom: 1pt solid #111; height: 12mm; }
+  .unter .strich { border-bottom: 1pt solid #111; height: 9mm; }
   .unter .wer { font-size: 8.5pt; color: #555; margin-top: 1.5mm; }
 
-  .fuss { margin-top: 5mm; font-size: 8pt; color: #777; line-height: 1.6;
-          border-top: 1pt solid #ddd; padding-top: 3mm; }
+  .fuss { margin-top: 3mm; font-size: 7.5pt; color: #777; line-height: 1.45;
+          border-top: 1pt solid #ddd; padding-top: 2mm; }
 
   /* ---- Seite 2: Tageskarten ---- */
   .karte {
     border: 1.5pt dashed #666; border-radius: 2.5mm;
-    padding: 4mm 5mm; margin-bottom: 6mm; height: 78mm;
+    padding: 4mm 5mm; margin-bottom: 4mm; height: 70mm;
     display: flex; flex-direction: column;
   }
   .karte .kopf { display: flex; justify-content: space-between; align-items: baseline;
@@ -89,6 +89,8 @@
     .seite { background: #fff; padding: 14mm; box-shadow: 0 2px 14px rgba(0,0,0,.3);
              max-width: 210mm; margin: 0 auto 12mm; }
   }
+  /* Hintergruende mitdrucken, ohne dass jemand die Checkbox im Druckdialog suchen muss */
+  @media print { * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 </style>
 </head>
 <body>
