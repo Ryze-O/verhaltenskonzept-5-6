@@ -57,14 +57,30 @@
   .fuss { margin-top: 8mm; padding-top: 4mm; border-top: 1.5pt solid #ddd;
           font-size: 11pt; color: #555; text-align: center; }
 
+  .zurueck { display: none; }
+
   @media screen {
     body { background: #ccc; padding: 12mm; }
     .seite { background: #fff; padding: 15mm; box-shadow: 0 2px 14px rgba(0,0,0,.3);
              max-width: 210mm; margin: 0 auto 12mm; }
+    .zurueck {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      flex-wrap: wrap; max-width: 210mm; margin: 0 auto 12mm;
+      font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+      font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .zurueck a { color: #0B524C; text-decoration: none; }
+    .zurueck a:hover { text-decoration: underline; }
+    .zurueck span { color: #555; }
   }
 </style>
 </head>
 <body>
+
+<div class="zurueck">
+  <a href="../index.html">&larr; Übersicht</a>
+  <span>Für die Klasse &middot; Ausdrucken mit Strg+P</span>
+</div>
 
 <div class="seite">
 
