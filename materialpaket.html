@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Materialpaket Zeitsparer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#EEF1F1; --surface:#FFFFFF; --ink:#16211F; --ink-2:#54625F; --ink-3:#849491;
+  --accent:#0F6B63; --accent-ink:#0B524C; --accent-soft:#DCEBE8; --rule:#D2DBD9;
+  --f-display:"Newsreader",Georgia,serif;
+  --f-body:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1514; --surface:#161F1E; --ink:#E4EDEB; --ink-2:#9BAAA7; --ink-3:#71827F;
+    --accent:#54C2B1; --accent-ink:#7BD6C6; --accent-soft:#173733; --rule:#2A3735;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1514; --surface:#161F1E; --ink:#E4EDEB; --ink-2:#9BAAA7; --ink-3:#71827F;
+  --accent:#54C2B1; --accent-ink:#7BD6C6; --accent-soft:#173733; --rule:#2A3735;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.6}
+
+/* ================= Seitenrahmen (nur Bildschirm) ================= */
+.chrome{max-width:960px;margin:0 auto;padding:56px 24px 40px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h1{font-family:var(--f-display);font-weight:500;font-size:clamp(34px,5.5vw,56px);line-height:1.05;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+.dek{font-size:18px;color:var(--ink-2);max-width:62ch;margin:0 0 32px}
+
+.druckhinweis{
+  background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0;padding:18px 22px;margin-bottom:36px;max-width:70ch;
+}
+.druckhinweis .titel{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.druckhinweis ol{margin:0;padding-left:20px}
+.druckhinweis li{margin-bottom:5px;font-size:15px}
+.druckhinweis b{font-weight:600}
+kbd{font-family:var(--f-mono);font-size:.88em;background:var(--accent-soft);color:var(--accent-ink);padding:1px 6px;border-radius:4px;border:1px solid var(--rule)}
+
+.inhalt{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-bottom:12px}
+.inhalt a{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--surface);border:1px solid var(--rule);border-radius:7px;
+  padding:13px 15px;text-decoration:none;color:var(--ink);
+}
+.inhalt a:hover{border-color:var(--accent)}
+.inhalt a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.inhalt .n{font-family:var(--f-mono);font-size:12px;color:var(--accent);padding-top:2px}
+.inhalt .t{font-weight:600;font-size:14.5px;line-height:1.35}
+.inhalt .f{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);margin-top:2px}
+
+/* Bezeichner über jedem Blatt */
+.blattkopf{
+  max-width:960px;margin:44px auto 12px;padding:0 24px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+}
+.blattkopf h2{font-family:var(--f-display);font-weight:500;font-size:24px;margin:0;letter-spacing:-.01em}
+.blattkopf .fmt{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.blattkopf .tip{font-size:13.5px;color:var(--ink-2);flex-basis:100%;margin:0}
+
+.buehne{overflow-x:auto;padding:0 24px 8px}
+
+/* ================= Papier ================= */
+/* Die Bögen sind bewusst immer weiß mit schwarzer Schrift - sie sind Papier. */
+.blatt{
+  background:#fff;color:#111;
+  font-family:"Segoe UI",system-ui,sans-serif;
+  margin:0 auto;padding:12mm;
+  box-shadow:0 2px 14px rgba(0,0,0,.28);
+}
+.blatt.a4hoch{width:210mm;min-height:297mm;font-size:10pt}
+.blatt.a4quer{width:297mm;min-height:210mm;font-size:10pt;padding:8mm}
+.blatt.a3hoch{width:297mm;min-height:420mm;font-size:12pt}
+.blatt *{box-sizing:border-box}
+.blatt h3,.blatt h4{font-family:inherit}
+
+@media print{
+  @page hoch{size:A4 portrait;margin:11mm}
+  @page quer{size:A4 landscape;margin:8mm}
+  @page poster{size:A3 portrait;margin:12mm}
+
+  body{background:#fff}
+  .chrome,.blattkopf{display:none !important}
+  .buehne{overflow:visible;padding:0}
+  .blatt{box-shadow:none;margin:0;padding:0;width:auto;min-height:0;break-after:page}
+  .blatt:last-child{break-after:auto}
+  .blatt.a4hoch{page:hoch}
+  .blatt.a4quer{page:quer}
+  .blatt.a3hoch{page:poster}
+  .seitenumbruch{break-after:page}
+}
+
+/* ---------- gemeinsame Papier-Bausteine ---------- */
+.p-kopf{border-bottom:2.5pt solid #111;padding-bottom:3mm;margin-bottom:5mm;display:flex;justify-content:space-between;align-items:flex-end;gap:8mm;flex-wrap:wrap}
+.p-kicker{font-size:8.5pt;letter-spacing:2.5pt;text-transform:uppercase;color:#666;font-weight:600}
+.p-titel{font-size:20pt;margin:1mm 0 0;letter-spacing:-.4pt;font-weight:700;line-height:1.1}
+.p-lead{font-size:9.5pt;color:#555;margin-top:2mm}
+.p-meta{font-size:9.5pt}
+.p-meta span{border-bottom:1pt solid #111;display:inline-block;min-width:28mm}
+.p-meta label{font-weight:600;margin-right:1.5mm}
+
+.lin{border-bottom:1pt solid #999;height:6mm}
+.fill{border-bottom:1pt solid #999;display:inline-block;min-width:30mm}
+
+.p-kasten{border:1.5pt solid #999;border-radius:2.5mm;padding:4mm 5mm;font-size:9.5pt;line-height:1.55}
+.p-kasten.gelb{background:#fffbeb;border-color:#d4a72c}
+.p-kasten.rot{background:#fef2f2;border-color:#b91c1c}
+.p-kasten .titel{font-size:8.5pt;letter-spacing:2pt;text-transform:uppercase;font-weight:700;color:#666;margin-bottom:2.5mm}
+.p-kasten.rot .titel{color:#b91c1c}
+.p-kasten > *:last-child{margin-bottom:0}
+
+.p-tab{width:100%;border-collapse:collapse;font-size:9.5pt}
+.p-tab th,.p-tab td{border:.75pt solid #666;padding:2mm 2.5mm;text-align:left;vertical-align:top}
+.p-tab thead th{background:#eee;font-size:8.5pt;text-transform:uppercase;letter-spacing:.5pt}
+.p-tab tbody th{background:#f6f6f6;font-weight:600;width:26mm}
+
+/* ---------- Wochenblatt ---------- */
+.wb-regeln{display:flex;gap:3mm;margin-bottom:3mm}
+.wb-regel{flex:1;border:1pt solid #999;border-radius:1.5mm;padding:1.5mm 2mm;min-height:9mm;background:#fafafa}
+.wb-regel b{font-size:7.5pt;color:#777;display:block;letter-spacing:.3pt}
+.wb{width:100%;border-collapse:collapse}
+.wb th,.wb td{border:.75pt solid #666;padding:0;text-align:center}
+.wb thead th{background:#eee;font-size:8.5pt;padding:1.5mm 1mm;font-weight:600}
+.wb thead th.team{background:#ddd}
+.wb tbody tr{height:13mm}
+.wb tbody tr:nth-child(even){background:#f7f7f7}
+.wb td.txt{text-align:left;padding:0 1.5mm}
+.fouls{display:flex;justify-content:center;gap:1.2mm}
+.fouls i{width:4.5mm;height:4.5mm;border:.75pt solid #444;border-radius:.7mm;background:#fff;display:block}
+.fouls i.limit{border-color:#c0392b;border-width:1.2pt}
+.wb-fuss{margin-top:3mm;display:flex;gap:4mm;align-items:stretch}
+.wb-fuss > div{flex:1}
+.wb-fuss .anleitung{flex:2}
+.wb-fuss ol{margin:0;padding-left:4mm;font-size:8.5pt}
+.wb-fuss .p-kasten div{font-size:8.5pt}
+.summe .zeile{display:flex;justify-content:space-between;padding:.8mm 0;border-bottom:.5pt dotted #aaa;font-size:8.5pt}
+.summe .zeile:last-child{border:none;font-weight:700}
+.summe .wert{min-width:16mm;border-bottom:1pt solid #111}
+
+/* ---------- Poster ---------- */
+.po-kopf{text-align:center;margin-bottom:10mm}
+.po-kicker{font-size:13pt;letter-spacing:3pt;text-transform:uppercase;color:#6b7280;font-weight:600}
+.po-titel{font-size:52pt;margin:2mm 0 0;letter-spacing:-1.5pt;line-height:1;font-weight:700}
+.po-klasse{margin-top:4mm;font-size:14pt;color:#444}
+.po-regeln{display:flex;flex-direction:column;gap:7mm}
+.po-regel{display:flex;border:2pt solid #111;border-radius:3mm;min-height:34mm;overflow:hidden}
+.po-nr{width:26mm;flex-shrink:0;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:40pt;font-weight:700}
+.po-feld{flex:1;padding:5mm 6mm;display:flex;flex-direction:column;justify-content:center;gap:7mm}
+.po-feld .l{border-bottom:1pt solid #c8c8c8}
+.po-kern{margin-top:10mm;border:3pt solid #111;border-radius:3mm;padding:7mm 8mm;text-align:center;background:#fffbeb}
+.po-kern p{margin:0;font-size:22pt;font-weight:700;line-height:1.3}
+.po-kern .klein{font-size:13pt;font-weight:400;margin-top:3mm;color:#444}
+.po-fuss{margin-top:8mm;display:flex;gap:6mm}
+.po-info{flex:1;border:1.5pt solid #999;border-radius:2.5mm;padding:4mm 5mm;text-align:center}
+.po-info b{display:block;font-size:11pt;color:#6b7280;letter-spacing:1pt;text-transform:uppercase;margin-bottom:2mm}
+.po-info .wert{font-size:26pt;font-weight:700}
+.po-info .wert.leer{border-bottom:1.5pt solid #999;display:inline-block;min-width:30mm}
+
+/* ---------- Verstärker-Menü ---------- */
+.vm-gruppe{margin-bottom:7mm}
+.vm-gruppe h4{font-size:13pt;letter-spacing:1.5pt;text-transform:uppercase;color:#6b7280;margin:0 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0}
+.vm-zeile{display:flex;align-items:center;border-bottom:1pt solid #ddd;min-height:13mm;padding:0 2mm}
+.vm-zeile:nth-child(even){background:#f8f8f8}
+.vm-was{flex:1;font-size:16pt}
+.vm-was.leer{border-bottom:1pt dotted #bbb;margin-right:8mm;height:7mm}
+.vm-preis{width:42mm;text-align:right;flex-shrink:0;font-size:20pt;font-weight:700;white-space:nowrap}
+.vm-preis.leer{border-bottom:1.5pt solid #999;height:8mm}
+.vm-preis small{font-size:12pt;font-weight:400;color:#666}
+.vm-stand{margin-top:8mm;border:3pt solid #111;border-radius:3mm;padding:6mm 8mm;display:flex;align-items:center;justify-content:space-between;gap:8mm;background:#fffbeb}
+.vm-stand .label{font-size:20pt;font-weight:700}
+.vm-stand .zahl{font-size:40pt;font-weight:700;border-bottom:2.5pt solid #111;min-width:55mm;text-align:center;line-height:1.1}
+
+/* ---------- Ampel ---------- */
+.am-skala{display:flex;margin-bottom:1mm}
+.am-skala .platz{width:52mm;flex-shrink:0}
+.am-stufe{flex:1;text-align:center;padding:2mm 1mm;font-weight:700;font-size:9.5pt;border:1pt solid #666;border-right:none}
+.am-stufe:last-child{border-right:1pt solid #666}
+.am-stufe small{display:block;font-weight:400;font-size:7.5pt;margin-top:.5mm}
+.s-weiss{background:#fff}.s-gelb{background:#fde047}.s-orange{background:#fb923c}
+.s-rot{background:#ef4444;color:#fff}.s-rot small{color:#ffe4e4}
+.am-zeile{display:flex;height:8.4mm}
+.am-zeile .name{width:52mm;flex-shrink:0;border:.5pt solid #bbb;border-top:none}
+.am-zeile .f{flex:1;border:.5pt solid #bbb;border-top:none;border-left:none}
+.am-zeile:first-child .name,.am-zeile:first-child .f{border-top:.5pt solid #bbb}
+.f-weiss{background:#fff}.f-gelb{background:#fef9c3}.f-orange{background:#ffedd5}.f-rot{background:#fee2e2}
+
+/* ---------- Vereinbarung ---------- */
+.vb-zeile{display:flex;gap:5mm;margin-bottom:3mm}
+.vb-f{flex:1}
+.vb-f label{display:block;font-size:8pt;color:#6b7280;font-weight:600;letter-spacing:.5pt;text-transform:uppercase;margin-bottom:1mm}
+.vb-ziel{display:flex;gap:3mm;align-items:flex-start;margin-bottom:3.5mm}
+.vb-ziel .nr{flex-shrink:0;width:6.5mm;height:6.5mm;border-radius:50%;background:#111;color:#fff;font-weight:700;font-size:8.5pt;display:flex;align-items:center;justify-content:center;margin-top:.5mm}
+.vb-ziel .l{flex:1;border-bottom:1pt solid #999;height:7.5mm}
+.vb-unter{display:flex;gap:6mm;margin-top:8mm}
+.vb-unter .u{flex:1}
+.vb-unter .strich{border-bottom:1pt solid #111;height:12mm}
+.vb-unter .wer{font-size:8.5pt;color:#555;margin-top:1.5mm}
+.karte{border:1.5pt dashed #666;border-radius:2.5mm;padding:4mm 5mm;margin-bottom:6mm;height:78mm;display:flex;flex-direction:column}
+.karte .kkopf{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1pt solid #ccc;padding-bottom:2mm;margin-bottom:3mm;gap:6mm}
+.karte .kkopf .t{font-size:12pt;font-weight:700}
+.karte .kkopf .m{font-size:8.5pt;color:#555}
+.raster{width:100%;border-collapse:collapse}
+.raster th,.raster td{border:.75pt solid #999;text-align:center}
+.raster thead th{background:#eee;font-size:8pt;padding:1.2mm 0}
+.raster th.zs{text-align:left;padding-left:2mm;width:46mm;background:#f5f5f5;font-weight:400;font-size:9pt}
+.raster tbody td{height:8mm}
+.karte .kfuss{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:9pt;padding-top:2.5mm;border-top:1pt solid #ccc;gap:5mm;flex-wrap:wrap}
+.schere{text-align:center;color:#999;font-size:8pt;letter-spacing:3pt;margin:-3mm 0 3mm}
+
+/* ---------- Schülerinfo ---------- */
+.si-kopf{text-align:center;margin-bottom:8mm}
+.si-titel{font-size:34pt;margin:2mm 0 0;letter-spacing:-1pt;line-height:1.05;font-weight:700}
+.si-unter{font-size:13pt;color:#444;margin-top:3mm}
+.si-schritt{display:flex;gap:5mm;align-items:flex-start;margin-bottom:5mm}
+.si-nr{flex-shrink:0;width:11mm;height:11mm;border-radius:50%;background:#111;color:#fff;font-weight:700;font-size:15pt;display:flex;align-items:center;justify-content:center}
+.si-schritt .txt{padding-top:1.5mm;font-size:12pt;line-height:1.5}
+.si-schritt b{display:block;font-size:13pt;margin-bottom:1mm}
+.si-knaller{border:3pt solid #111;border-radius:4mm;background:#fffbeb;padding:6mm 7mm;text-align:center;margin:8mm 0}
+.si-knaller .gross{font-size:21pt;font-weight:700;line-height:1.25}
+.si-knaller .klein{font-size:12pt;color:#444;margin-top:3mm}
+.si-frage{border-left:3.5pt solid #111;padding-left:5mm;margin-bottom:5mm;font-size:12pt;line-height:1.5}
+.si-frage b.q{display:block;font-size:13pt;margin-bottom:1mm}
+.si-rechnung{display:flex;align-items:center;justify-content:center;gap:5mm;border:1.5pt solid #999;border-radius:3mm;padding:5mm;margin:5mm 0;background:#fafafa;flex-wrap:wrap}
+.si-rechnung .k{text-align:center}
+.si-rechnung .zahl{font-size:24pt;font-weight:700;line-height:1.1}
+.si-rechnung .wort{font-size:10pt;color:#555}
+.si-rechnung .op{font-size:20pt;color:#999}
+</style>
+
+</head>
+<body>
+<div style="border-bottom:1px solid var(--rule);background:var(--surface)"><div style="max-width:960px;margin:0 auto;padding:13px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><a href="index.html" style="font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);text-decoration:none">&larr; Übersicht</a><span style="font-family:var(--f-mono);font-size:12px;color:var(--ink-3)">Druckmaterial</span></div></div>
+<div class="chrome">
+  <div class="eyebrow">Verhaltenskonzept Jahrgang 5/6 · Gesamtschule NRW</div>
+  <h1>Materialpaket Zeitsparer</h1>
+  <p class="dek">Sieben Bögen, alle druckfertig. Direkt aus dem Browser drucken — jeder Bogen kommt automatisch im richtigen Format aus dem Drucker.</p>
+
+  <div class="druckhinweis">
+    <div class="titel">Vor dem Drucken</div>
+    <ol>
+      <li><kbd>Strg</kbd> + <kbd>P</kbd> drücken (Mac: <kbd>Cmd</kbd> + <kbd>P</kbd>).</li>
+      <li><b>„Hintergrundgrafiken"</b> unter <i>Weitere Einstellungen</i> aktivieren — sonst fehlen die Ampelfarben und die grauen Tabellenköpfe.</li>
+      <li>Skalierung auf <b>100 %</b> stellen, nicht „an Seite anpassen".</li>
+      <li>Poster und Verstärker-Menü brauchen <b>A3</b>. Ohne A3-Drucker im Druckdialog auf A4 verkleinern — bleibt lesbar, wirkt aber weniger.</li>
+    </ol>
+  </div>
+
+  <nav class="inhalt" aria-label="Inhalt">
+    <a href="#m1"><span class="n">01</span><span><span class="t">Wochenblatt</span><span class="f">A4 quer · 1 pro Klasse und Woche</span></span></a>
+    <a href="#m2"><span class="n">02</span><span><span class="t">Klassenposter Regeln</span><span class="f">A3 hoch · Klassenraum</span></span></a>
+    <a href="#m3"><span class="n">03</span><span><span class="t">Verstärker-Menü</span><span class="f">A3 hoch · Klassenraum</span></span></a>
+    <a href="#m4"><span class="n">04</span><span><span class="t">Ampel oder Spiel?</span><span class="f">A4 hoch · Lehrerzimmer</span></span></a>
+    <a href="#m5"><span class="n">05</span><span><span class="t">Ampel + Sichtschutz</span><span class="f">A4 hoch · 2 Seiten</span></span></a>
+    <a href="#m6"><span class="n">06</span><span><span class="t">Vereinbarung + Tageskarten</span><span class="f">A4 hoch · 2 Seiten</span></span></a>
+    <a href="#m7"><span class="n">07</span><span><span class="t">Schülerinfo</span><span class="f">A4 hoch · 2 Seiten</span></span></a>
+  </nav>
+</div>
+
+<!-- ============ 01 Wochenblatt ============ -->
+<div class="blattkopf" id="m1">
+  <h2>01 · Wochenblatt</h2><span class="fmt">A4 quer</span>
+  <p class="tip">Das Arbeitspferd. Liegt im Klassenordner, ein Blatt pro Woche. Alles, was eine Fachlehrkraft im Unterricht braucht, steht drauf.</p>
+</div>
+<div class="buehne"><div class="blatt a4quer">
+  <div class="p-kopf">
+    <div>
+      <div class="p-titel">KlasseKinderSpiel — Wochenblatt</div>
+      <div class="p-lead">Foul-Limit: <b>4</b> · Pro gewinnendes Team: <b>1 Minute</b> auf den Zeitsparer.</div>
+    </div>
+    <div class="p-meta"><label>Klasse</label><span></span> &nbsp; <label>Woche vom</label><span></span></div>
+  </div>
+
+  <div class="wb-regeln">
+    <div class="wb-regel"><b>REGEL 1</b></div><div class="wb-regel"><b>REGEL 2</b></div>
+    <div class="wb-regel"><b>REGEL 3</b></div><div class="wb-regel"><b>REGEL 4</b></div>
+  </div>
+
+  <table class="wb">
+    <thead><tr>
+      <th style="width:17mm">Datum</th><th style="width:20mm">Fach</th>
+      <th class="team" style="width:27mm">Team 1</th><th class="team" style="width:27mm">Team 2</th>
+      <th class="team" style="width:27mm">Team 3</th><th class="team" style="width:27mm">Team 4</th>
+      <th class="team" style="width:27mm">Team 5</th><th class="team" style="width:27mm">Team 6</th>
+      <th style="width:18mm">Teams<br>gewonnen</th><th style="width:16mm">Minuten</th>
+    </tr></thead>
+    <tbody id="wb-body"></tbody>
+  </table>
+
+  <div class="wb-fuss">
+    <div class="p-kasten anleitung">
+      <div class="titel">So geht's — 30 Sekunden pro Stunde</div>
+      <ol>
+        <li>Ansagen: „Wir spielen jetzt ___ Minuten das KlasseKinderSpiel."</li>
+        <li>Regelverstoß? <b>Wortlos ein Kästchen ankreuzen</b> beim Team. Kein Kommentar, kein Name.</li>
+        <li>Am Ende: Jedes Team mit <b>höchstens 3 Kreuzen</b> hat gewonnen (rotes Kästchen = Limit).</li>
+        <li>Anzahl gewinnender Teams eintragen → ebenso viele Minuten auf den Zeitsparer.</li>
+      </ol>
+    </div>
+    <div class="p-kasten gelb">
+      <div class="titel">Nicht vergessen</div>
+      <div>• Alle Teams können <b>gleichzeitig</b> gewinnen — sie spielen gegen das Limit, nicht gegeneinander.</div>
+      <div>• <b>Kein Kind</b> wird von der Belohnung ausgeschlossen.</div>
+      <div>• Punkte gibt es <b>nur für Verhalten</b>, nie für Leistung.</div>
+      <div>• Die Ampel ist die Notbremse, nicht die erste Reaktion.</div>
+    </div>
+    <div class="p-kasten summe" style="background:#f2f2f2">
+      <div class="titel">Zeitsparer</div>
+      <div class="zeile"><span>Übertrag Vorwoche</span><span class="wert"></span></div>
+      <div class="zeile"><span>Diese Woche</span><span class="wert"></span></div>
+      <div class="zeile"><span>Eingelöst</span><span class="wert"></span></div>
+      <div class="zeile"><span>Neuer Stand</span><span class="wert"></span></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ 02 Poster ============ -->
+<div class="blattkopf" id="m2">
+  <h2>02 · Klassenposter Regeln</h2><span class="fmt">A3 hoch</span>
+  <p class="tip">Bewusst leer. Die Regeln schreiben die Kinder selbst hinein — positiv formuliert und beobachtbar. Keine Namen auf dieses Poster.</p>
+</div>
+<div class="buehne"><div class="blatt a3hoch">
+  <div class="po-kopf">
+    <div class="po-kicker">KlasseKinderSpiel</div>
+    <div class="po-titel">Unsere Regeln</div>
+    <div class="po-klasse">Klasse <span class="fill" style="min-width:45mm">&nbsp;</span></div>
+  </div>
+  <div class="po-regeln">
+    <div class="po-regel"><div class="po-nr">1</div><div class="po-feld"><div class="l"></div><div class="l"></div></div></div>
+    <div class="po-regel"><div class="po-nr">2</div><div class="po-feld"><div class="l"></div><div class="l"></div></div></div>
+    <div class="po-regel"><div class="po-nr">3</div><div class="po-feld"><div class="l"></div><div class="l"></div></div></div>
+    <div class="po-regel"><div class="po-nr">4</div><div class="po-feld"><div class="l"></div><div class="l"></div></div></div>
+  </div>
+  <div class="po-kern">
+    <p>Alle Teams können gleichzeitig gewinnen.</p>
+    <div class="klein">Wir spielen nicht gegeneinander — wir spielen gegen das Limit.</div>
+  </div>
+  <div class="po-fuss">
+    <div class="po-info"><b>Foul-Limit</b><div class="wert">4</div></div>
+    <div class="po-info"><b>Pro gewinnendes Team</b><div class="wert">1 Min</div></div>
+    <div class="po-info"><b>Zeitsparer-Stand</b><div class="wert leer">&nbsp;</div></div>
+  </div>
+</div></div>
+
+<!-- ============ 03 Verstärker-Menü ============ -->
+<div class="blattkopf" id="m3">
+  <h2>03 · Verstärker-Menü</h2><span class="fmt">A3 hoch</span>
+  <p class="tip">Die vorgedruckten Zeilen sind nur Anker — die Klasse darf sie ersetzen und über die Preise verhandeln. Genau darum geht es. Nach acht Wochen neu aushandeln.</p>
+</div>
+<div class="buehne"><div class="blatt a3hoch">
+  <div class="po-kopf">
+    <div class="po-kicker">Zeitsparer</div>
+    <div class="po-titel" style="font-size:46pt">Unser Verstärker-Menü</div>
+    <div class="po-klasse">Klasse <span class="fill" style="min-width:40mm">&nbsp;</span> &nbsp;·&nbsp; gültig ab <span class="fill" style="min-width:40mm">&nbsp;</span></div>
+  </div>
+
+  <div class="vm-gruppe"><h4>Kleine Belohnungen</h4>
+    <div class="vm-zeile"><div class="vm-was">5 Minuten Spielzeit am Freitag</div><div class="vm-preis">5 <small>Min</small></div></div>
+    <div class="vm-zeile"><div class="vm-was">Musik während der Stillarbeit (eine Stunde)</div><div class="vm-preis">10 <small>Min</small></div></div>
+    <div class="vm-zeile"><div class="vm-was leer"></div><div class="vm-preis leer"></div></div>
+    <div class="vm-zeile"><div class="vm-was leer"></div><div class="vm-preis leer"></div></div>
+  </div>
+  <div class="vm-gruppe"><h4>Mittlere Belohnungen</h4>
+    <div class="vm-zeile"><div class="vm-was">Sitzplatzwahl für eine Woche</div><div class="vm-preis">20 <small>Min</small></div></div>
+    <div class="vm-zeile"><div class="vm-was">Hausaufgaben-Joker für die ganze Klasse</div><div class="vm-preis">30 <small>Min</small></div></div>
+    <div class="vm-zeile"><div class="vm-was leer"></div><div class="vm-preis leer"></div></div>
+    <div class="vm-zeile"><div class="vm-was leer"></div><div class="vm-preis leer"></div></div>
+  </div>
+  <div class="vm-gruppe"><h4>Große Belohnungen</h4>
+    <div class="vm-zeile"><div class="vm-was">Spielestunde</div><div class="vm-preis">45 <small>Min</small></div></div>
+    <div class="vm-zeile"><div class="vm-was">Klassenfrühstück</div><div class="vm-preis">60 <small>Min</small></div></div>
+    <div class="vm-zeile"><div class="vm-was leer"></div><div class="vm-preis leer"></div></div>
+    <div class="vm-zeile"><div class="vm-was leer"></div><div class="vm-preis leer"></div></div>
+  </div>
+
+  <div class="vm-stand"><div class="label">Unser Zeitsparer-Stand</div><div class="zahl">&nbsp;</div></div>
+  <div style="margin-top:6mm;font-size:11pt;color:#555;text-align:center">
+    Preise dürfen verhandelt werden — genau darum geht es.<br>
+    <b>Nächste Neuverhandlung im Klassenrat:</b> <span class="fill" style="min-width:35mm">&nbsp;</span>
+  </div>
+</div></div>
+
+<!-- ============ 04 Abgrenzung ============ -->
+<div class="blattkopf" id="m4">
+  <h2>04 · Ampel oder Spiel?</h2><span class="fmt">A4 hoch</span>
+  <p class="tip">Die wichtigste Seite fürs Kollegium. Einmal in den Klassenraum, einmal ins Lehrerzimmer.</p>
+</div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div class="p-kopf"><div>
+    <div class="p-kicker">Jahrgang 5/6 · Für Klassenraum und Lehrerzimmer</div>
+    <div class="p-titel" style="font-size:26pt">Ampel oder Spiel?</div>
+    <div class="p-lead">Zwei Instrumente, zwei Aufgaben. Damit sie sich nicht in die Quere kommen.</div>
+  </div></div>
+
+  <div class="p-kasten gelb" style="margin-bottom:7mm;border-width:2.5pt">
+    <div class="titel" style="color:#92700e">Die Faustregel</div>
+    <p style="margin:0 0 2mm;font-size:14pt;font-weight:700;line-height:1.35">Läuft gerade eine Spielphase? Dann ist ein Regelverstoß zuerst ein <b>Foul</b> — nicht die Ampel.</p>
+    <p style="margin:0;font-size:10pt;color:#444">Die Ampel ist die Notbremse: bei ernsthafter Unterbrechung des Unterrichts oder Gefährdung. Sie ist nicht die erste Reaktion.</p>
+  </div>
+
+  <table class="p-tab" style="margin-bottom:7mm">
+    <thead><tr><th style="width:26mm"></th><th style="color:#b45309">Ampel</th><th style="color:#1d4ed8">KlasseKinderSpiel</th></tr></thead>
+    <tbody>
+      <tr><th>Zweck</th><td>Grenzen ziehen</td><td>Verhalten aufbauen</td></tr>
+      <tr><th>Ebene</th><td>einzelnes Kind</td><td>Team</td></tr>
+      <tr><th>Auslöser</th><td>Regelverstoß trotz Ermahnung</td><td>läuft in Spielphasen dauerhaft mit</td></tr>
+      <tr><th>Sichtbarkeit</th><td>nur intern, verdeckt</td><td>Teamstriche, keine Namen</td></tr>
+      <tr><th>Reaktion</th><td>Eskalationsstufe, Magnet rückt</td><td>ein Strich, wortlos</td></tr>
+      <tr><th>Reset</th><td>jede Stunde</td><td>jede Spielrunde</td></tr>
+      <tr><th>Gilt</th><td>immer</td><td>nur in angekündigten Spielphasen</td></tr>
+      <tr><th>Eskalation</th><td>Auszeitzettel → Auszeitraum</td><td>keine — nur kein Gewinn in dieser Runde</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="font-size:12pt;margin:0 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wenn etwas passiert — in dieser Reihenfolge</h4>
+  <ol style="margin:0 0 7mm;padding-left:6mm;font-size:10pt;line-height:1.5">
+    <li style="margin-bottom:2mm"><b>Läuft eine Spielphase?</b> Wortlos ein Strich beim Team. Fertig. Keine Ansprache, kein Name, keine Diskussion.</li>
+    <li style="margin-bottom:2mm"><b>Geht es weiter?</b> Kurze, ruhige Ermahnung an das Kind — jetzt persönlich, aber knapp.</li>
+    <li style="margin-bottom:2mm"><b>Wird der Unterricht ernsthaft unterbrochen?</b> Erst jetzt die Ampel. Magnet rückt eine Stufe.</li>
+    <li><b>Rot erreicht?</b> Auszeitzettel am Extratisch. Bei weiterem Verstoß Auszeitraum — unverändert wie bisher.</li>
+  </ol>
+
+  <div class="p-kasten rot">
+    <div class="titel">Drei Dinge, die nicht passieren dürfen</div>
+    <ul style="margin:0;padding-left:5mm">
+      <li><b>Kein Kind von einer Klassenbelohnung ausschließen.</b> Auch nicht bei massivem Fehlverhalten — dafür ist die Ampel da. Ein Ausschluss wäre der Sache nach eine Ordnungsmaßnahme ohne das Verfahren nach § 53 SchulG NRW.</li>
+      <li><b>Keine Namen bei den Fouls.</b> Der Strich geht ans Team, nicht ans Kind. Sonst entsteht genau der Gruppendruck, den die Konstruktion vermeiden soll.</li>
+      <li><b>Keine Punkte für Leistung.</b> Nur für Verhalten. Nichts davon fließt in Noten oder Zeugnisbemerkungen ein.</li>
+    </ul>
+  </div>
+</div></div>
+
+<!-- ============ 05 Ampel ============ -->
+<div class="blattkopf" id="m5">
+  <h2>05 · Ampel + Sichtschutz</h2><span class="fmt">A4 hoch · 2 Seiten</span>
+  <p class="tip">Neutrales Startfeld statt „Grün = erste Ermahnung". Seite 2 wird als Klappe darübergeklebt, wenn Fachfremde den Raum nutzen.</p>
+</div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div class="p-kopf">
+    <div class="p-titel">Ampel</div>
+    <div class="p-meta">Klasse <span style="min-width:30mm"></span> &nbsp; Woche <span style="min-width:24mm"></span></div>
+  </div>
+  <div class="am-skala">
+    <div class="platz"></div>
+    <div class="am-stufe s-weiss">Start<small>alles in Ordnung</small></div>
+    <div class="am-stufe s-gelb">1. Ermahnung<small>Gelb</small></div>
+    <div class="am-stufe s-orange">2. Ermahnung<small>Orange</small></div>
+    <div class="am-stufe s-rot">3. Ermahnung<small>Auszeitzettel</small></div>
+  </div>
+  <div id="am-liste"></div>
+  <div style="margin-top:4mm;font-size:8.5pt;color:#555;line-height:1.6;border-top:1pt solid #ddd;padding-top:3mm">
+    <b style="color:#111">Was sich geändert hat:</b> Das Startfeld ist jetzt <b>weiß</b>. Bisher stand Grün für die erste Ermahnung — ein Kind auf Grün war also bereits auffällig geworden, sah aber vorbildlich aus.<br>
+    <b style="color:#111">Reset:</b> [ANPASSEN: jede Stunde / jeden Tag] · <b style="color:#111">Elterninformation ab:</b> [ANPASSEN] · <b style="color:#111">Bei Rot:</b> Auszeitzettel am Extratisch, bei weiterem Verstoß Auszeitraum — unverändert.<br>
+    <b style="color:#111">Datenschutz:</b> Diese Liste ist eine Verhaltensbewertung mit Namen. Sie darf für fachfremde Personen nicht einsehbar sein — Sichtschutz (nächste Seite) verwenden.
+  </div>
+</div></div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div style="height:265mm;border:3pt solid #111;border-radius:4mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20mm">
+    <div style="font-size:40pt;font-weight:700;line-height:1.15;letter-spacing:-1pt">Diese Seite<br>bitte umklappen</div>
+    <div style="font-size:13pt;color:#555;margin-top:8mm;line-height:1.6;max-width:130mm">
+      Auf A4 drucken und als Klappe über die Ampelliste kleben.<br><br>
+      Wird der Raum von einer anderen Klasse, von Vertretungskräften, bei Elternabenden oder für Veranstaltungen genutzt, bleibt die Liste zugeklappt.<br><br>
+      <b>Grund:</b> Eine Namensliste, an der ablesbar ist, wie sich ein einzelnes Kind verhalten hat, ist eine personenbezogene Verhaltensbewertung. Sie gehört nicht vor die Augen unbeteiligter Dritter.
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ 06 Vereinbarung ============ -->
+<div class="blattkopf" id="m6">
+  <h2>06 · Vereinbarung + Tageskarten</h2><span class="fmt">A4 hoch · 2 Seiten</span>
+  <p class="tip">Baustein 3, nur für ein bis drei Kinder pro Klasse. Seite 2 enthält drei Tageskarten zum Ausschneiden.</p>
+</div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div class="p-kopf"><div>
+    <div class="p-kicker">Verhaltenskonzept Jahrgang 5/6 · Baustein 3</div>
+    <div class="p-titel" style="font-size:22pt">Unsere Vereinbarung</div>
+    <div class="p-lead">Befristet auf sechs Wochen. Wird danach gemeinsam überprüft.</div>
+  </div></div>
+
+  <div class="vb-zeile">
+    <div class="vb-f" style="flex:2"><label>Name</label><div class="lin"></div></div>
+    <div class="vb-f"><label>Klasse</label><div class="lin"></div></div>
+  </div>
+  <div class="vb-zeile">
+    <div class="vb-f"><label>Vereinbart am</label><div class="lin"></div></div>
+    <div class="vb-f"><label>Läuft bis (6 Wochen)</label><div class="lin"></div></div>
+    <div class="vb-f"><label>Gespräch am</label><div class="lin"></div></div>
+  </div>
+
+  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Das nehme ich mir vor</h4>
+  <div class="vb-ziel"><div class="nr">1</div><div class="l"></div></div>
+  <div class="vb-ziel"><div class="nr">2</div><div class="l"></div></div>
+  <div class="vb-ziel"><div class="nr">3</div><div class="l"></div></div>
+  <div style="font-size:8.5pt;color:#666;font-style:italic;margin:-1mm 0 4mm 9.5mm">Positiv formuliert und beobachtbar. Beispiel: „Ich hole mein Material in den ersten zwei Minuten raus." — nicht: „Ich störe nicht."</div>
+
+  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Mein Tagesziel</h4>
+  <div class="p-kasten gelb">
+    <div class="titel">So viele Häkchen brauche ich pro Tag</div>
+    <div style="font-size:13pt">Ich schaffe <span class="fill" style="min-width:16mm;border-bottom-width:1.5pt;border-color:#111">&nbsp;</span> von <span class="fill" style="min-width:16mm;border-bottom-width:1.5pt;border-color:#111">&nbsp;</span> Häkchen.</div>
+    <div style="font-size:8.5pt;color:#666;margin-top:2.5mm"><b>Wichtig:</b> Das Ziel muss von Anfang an erreichbar sein. Wer bisher bei etwa 40 % liegt, startet nicht bei 90 %. Lieber niedrig ansetzen und später anheben.</div>
+  </div>
+
+  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wenn ich mein Tagesziel schaffe</h4>
+  <div class="vb-zeile">
+    <div class="vb-f"><label>In der Schule</label><div class="lin"></div></div>
+    <div class="vb-f"><label>Zu Hause</label><div class="lin"></div></div>
+  </div>
+
+  <h4 style="font-size:11pt;margin:6mm 0 3mm;padding-bottom:1.5mm;border-bottom:1.5pt solid #d0d0d0">Wie wir wieder aufhören</h4>
+  <div class="p-kasten">
+    <div style="line-height:1.7">
+      <b>Woche 1–3:</b> Häkchen in jeder Stunde, Auswertung jeden Tag.<br>
+      <b>Woche 4–5:</b> Auswertung nur noch jeden zweiten Tag.<br>
+      <b>Woche 6:</b> Auswertung einmal in der Woche.<br>
+      <b>Danach:</b> Gespräch — beenden, anpassen oder verlängern.
+    </div>
+    <div style="font-size:8.5pt;color:#666;margin-top:3mm">Das Ziel ist, dass die Karte irgendwann nicht mehr gebraucht wird. Das ist von Anfang an so geplant.</div>
+  </div>
+
+  <div class="vb-unter">
+    <div class="u"><div class="strich"></div><div class="wer">Schülerin / Schüler</div></div>
+    <div class="u"><div class="strich"></div><div class="wer">Eltern / Erziehungsberechtigte</div></div>
+    <div class="u"><div class="strich"></div><div class="wer">Klassenleitung</div></div>
+  </div>
+
+  <div style="margin-top:5mm;font-size:8pt;color:#777;line-height:1.6;border-top:1pt solid #ddd;padding-top:3mm">
+    <b>Für die Lehrkräfte:</b> Ein Häkchen pro Ziel am Stundenende, etwa zehn Sekunden. Im Zweifel großzügig sein — die Karte soll Erfolge sichtbar machen, nicht Lücken dokumentieren.<br>
+    <b>Die Karte gehört dem Kind.</b> Sie wird nicht ausgehängt, nicht herumgezeigt und nicht dort besprochen, wo Dritte mithören.<br>
+    <b>Datenschutz:</b> Ausschließlich in Papierform. Keine Erfassung auf privaten Geräten oder online — individuelle Verhaltensdaten sind in Anlage 3 VO-DV I nicht als zulässig gelistet. Aufbewahrung verschlossen in der Schule.
+  </div>
+</div></div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div class="p-kopf"><div>
+    <div class="p-kicker">Zum Ausschneiden · eine Karte pro Tag</div>
+    <div class="p-titel" style="font-size:22pt">Meine Tageskarte</div>
+  </div></div>
+  <div id="karten"></div>
+</div></div>
+
+<!-- ============ 07 Schülerinfo ============ -->
+<div class="blattkopf" id="m7">
+  <h2>07 · Schülerinfo</h2><span class="fmt">A4 hoch · 2 Seiten</span>
+  <p class="tip">Für die Einführungsstunde. Kann ausgeteilt oder als Aushang genutzt werden.</p>
+</div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div class="si-kopf">
+    <div class="p-kicker">Neu in unserer Klasse</div>
+    <div class="si-titel">Das KlasseKinderSpiel</div>
+    <div class="si-unter">Wie ihr gemeinsam Zeit gewinnt</div>
+  </div>
+  <h4 style="font-size:16pt;margin:8mm 0 3mm">So geht das Spiel</h4>
+  <div class="si-schritt"><div class="si-nr">1</div><div class="txt"><b>Wir machen zusammen Regeln.</b>Vier Stück. Ihr überlegt sie euch selbst — sie hängen dann als Plakat im Klassenraum.</div></div>
+  <div class="si-schritt"><div class="si-nr">2</div><div class="txt"><b>Eure Tischgruppe ist euer Team.</b>Ihr spielt zusammen, nicht allein.</div></div>
+  <div class="si-schritt"><div class="si-nr">3</div><div class="txt"><b>Die Lehrerin sagt an, wann das Spiel losgeht.</b>Meistens für zehn bis zwanzig Minuten. Danach ist es wieder vorbei.</div></div>
+  <div class="si-schritt"><div class="si-nr">4</div><div class="txt"><b>Wird eine Regel gebrochen, bekommt das Team einen Strich.</b>Ganz ohne Schimpfen. Es wird auch kein Name gesagt.</div></div>
+  <div class="si-schritt"><div class="si-nr">5</div><div class="txt"><b>Am Ende zählen wir.</b>Jedes Team mit höchstens 3 Strichen hat gewonnen.</div></div>
+  <div class="si-schritt"><div class="si-nr">6</div><div class="txt"><b>Für jedes Team, das gewinnt, gibt es eine Minute.</b>Die kommt auf euren Zeitsparer — für die ganze Klasse.</div></div>
+
+  <div class="si-rechnung">
+    <div class="k"><div class="zahl">5</div><div class="wort">Teams gewinnen</div></div>
+    <div class="op">→</div>
+    <div class="k"><div class="zahl">5</div><div class="wort">Minuten für alle</div></div>
+    <div class="op">→</div>
+    <div class="k"><div class="zahl">⏳</div><div class="wort">auf den Zeitsparer</div></div>
+  </div>
+
+  <div class="si-knaller">
+    <div class="gross">Alle Teams können gleichzeitig gewinnen!</div>
+    <div class="klein">Ihr spielt <b>nicht gegeneinander</b>. Ihr spielt alle zusammen gegen die vier Striche.</div>
+  </div>
+</div></div>
+<div class="buehne"><div class="blatt a4hoch">
+  <div class="si-kopf">
+    <div class="p-kicker">Was ihr bestimmt wissen wollt</div>
+    <div class="si-titel">Eure Fragen</div>
+  </div>
+  <div class="si-frage"><b class="q">Was passiert mit dem Zeitfresser-Strahl?</b>Den gibt es nicht mehr. Euer Name steht ab jetzt nirgends mehr an der Wand. Dass man zügig anfangen soll, bleibt trotzdem wichtig — das ist jetzt eine der Regeln im Spiel.</div>
+  <div class="si-frage"><b class="q">Und die Ampel?</b>Die bleibt. Sie ist für den Notfall da, wenn etwas richtig aus dem Ruder läuft. Neu ist: Ihr fangt jetzt bei <b>Weiß</b> an. Früher war Grün schon die erste Ermahnung — das war verwirrend.</div>
+  <div class="si-frage"><b class="q">Kann ich mein Team ruinieren?</b>Nein. Die Grenze ist mit Absicht so gesetzt, dass ein einzelnes Kind das Team nicht kippen kann. Und wenn ein Team es öfter nicht schafft, machen wir die Grenze größer — nicht das Kind zum Problem.</div>
+  <div class="si-frage"><b class="q">Kann ich von einer Belohnung ausgeschlossen werden?</b><b>Nein. Niemals.</b> Wenn die Klasse etwas verdient hat, ist die ganze Klasse dabei. Ohne Ausnahme.</div>
+  <div class="si-frage"><b class="q">Gibt es Punkte für gute Noten?</b>Nein. Es geht nur darum, wie wir zusammen arbeiten. Nicht darum, wer was kann oder wer schneller fertig ist.</div>
+  <div class="si-frage"><b class="q">Kommt das ins Zeugnis?</b>Nein. Gar nichts davon.</div>
+  <div class="si-frage"><b class="q">Wofür können wir die Minuten ausgeben?</b>Das bestimmt ihr selbst! Wir machen zusammen eine Liste — zum Beispiel Spielzeit, Musik beim Arbeiten, Sitzplatz aussuchen oder ein Klassenfrühstück. Ihr dürft auch über die Preise verhandeln.</div>
+  <div class="si-frage"><b class="q">Warum machen wir das überhaupt?</b>Weil bisher vor allem aufgefallen ist, wenn etwas <i>nicht</i> geklappt hat. Wenn ihr euch angestrengt habt, hat das kaum jemand gesehen. Das drehen wir jetzt um.</div>
+  <div style="margin-top:8mm;padding-top:4mm;border-top:1.5pt solid #ddd;font-size:11pt;color:#555;text-align:center">
+    Fragen? Sprecht uns einfach an.<br>
+    <b>Wir fangen an am:</b> <span class="fill" style="min-width:45mm;border-bottom-width:1.5pt">&nbsp;</span>
+  </div>
+</div></div>
+
+<script>
+(function(){
+  /* Wochenblatt: 8 Spielrunden */
+  var tb = document.getElementById('wb-body');
+  if (tb){
+    var zellen = '';
+    for (var t = 0; t < 6; t++){
+      zellen += '<td><div class="fouls"><i></i><i></i><i></i><i class="limit"></i></div></td>';
+    }
+    var html = '';
+    for (var r = 0; r < 8; r++){
+      html += '<tr><td class="txt"></td><td class="txt"></td>' + zellen + '<td></td><td></td></tr>';
+    }
+    tb.innerHTML = html;
+  }
+
+  /* Ampel: 28 Namenszeilen */
+  var al = document.getElementById('am-liste');
+  if (al){
+    var z = '';
+    for (var i = 0; i < 28; i++){
+      z += '<div class="am-zeile"><div class="name"></div>' +
+           '<div class="f f-weiss"></div><div class="f f-gelb"></div>' +
+           '<div class="f f-orange"></div><div class="f f-rot"></div></div>';
+    }
+    al.innerHTML = z;
+  }
+
+  /* Tageskarten: 3 Stück mit Schnittlinie dazwischen */
+  var kw = document.getElementById('karten');
+  if (kw){
+    var zeilen = '';
+    for (var g = 1; g <= 3; g++){
+      var td = '';
+      for (var s = 0; s < 8; s++) td += '<td></td>';
+      zeilen += '<tr><th class="zs">' + g + '</th>' + td + '</tr>';
+    }
+    var karte =
+      '<div class="karte">' +
+        '<div class="kkopf"><div class="t">Meine Tageskarte</div>' +
+        '<div class="m">Name <span class="fill" style="min-width:22mm"></span> &nbsp; Datum <span class="fill" style="min-width:22mm"></span></div></div>' +
+        '<table class="raster"><thead><tr><th class="zs">Mein Ziel</th>' +
+        '<th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th><th>7.</th><th>8.</th></tr></thead>' +
+        '<tbody>' + zeilen + '</tbody></table>' +
+        '<div class="kfuss">' +
+          '<div>Häkchen heute: <b class="fill" style="min-width:12mm;border-color:#111"></b> &nbsp; Mein Ziel: <b class="fill" style="min-width:12mm;border-color:#111"></b></div>' +
+          '<div><b>Geschafft?</b> &nbsp; ☐ ja &nbsp; ☐ fast</div>' +
+          '<div>Eltern: <span class="fill" style="min-width:26mm"></span></div>' +
+        '</div>' +
+      '</div>';
+    var schnitt = '<div class="schere">✂ &nbsp;' + new Array(50).join('··') + '</div>';
+    kw.innerHTML = karte + schnitt + karte + schnitt + karte;
+  }
+})();
+</script>
+
+</body>
+</html>

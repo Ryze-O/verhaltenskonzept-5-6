@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Verhaltensvereinbarung mit Tagesrückmeldung</title>
+<style>
+  @page { size: A4 portrait; margin: 12mm; }
+  * { box-sizing: border-box; }
+
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; font-size: 10pt; }
+
+  .seite { page-break-after: always; }
+  .seite:last-child { page-break-after: auto; }
+
+  header { border-bottom: 2.5pt solid #111; padding-bottom: 3mm; margin-bottom: 5mm; }
+  .kicker { font-size: 8.5pt; letter-spacing: 2.5pt; text-transform: uppercase;
+            color: #6b7280; font-weight: 600; }
+  h1 { font-size: 22pt; margin: 1mm 0 0; letter-spacing: -0.5pt; }
+  .lead { font-size: 9.5pt; color: #555; margin-top: 2mm; }
+
+  h2 { font-size: 11pt; margin: 6mm 0 3mm; padding-bottom: 1.5mm;
+       border-bottom: 1.5pt solid #d0d0d0; letter-spacing: 0.3pt; }
+  h2:first-of-type { margin-top: 0; }
+
+  .zeile { display: flex; gap: 5mm; margin-bottom: 3mm; }
+  .f { flex: 1; }
+  .f label { display: block; font-size: 8pt; color: #6b7280; font-weight: 600;
+             letter-spacing: 0.5pt; text-transform: uppercase; margin-bottom: 1mm; }
+  .f .lin { border-bottom: 1pt solid #999; height: 6mm; }
+
+  /* Ziele */
+  .ziel { display: flex; gap: 3mm; align-items: flex-start; margin-bottom: 3.5mm; }
+  .ziel .nr { flex-shrink: 0; width: 6.5mm; height: 6.5mm; border-radius: 50%;
+              background: #111; color: #fff; font-weight: 700; font-size: 8.5pt;
+              display: flex; align-items: center; justify-content: center; margin-top: 0.5mm; }
+  .ziel .lin { flex: 1; border-bottom: 1pt solid #999; height: 7.5mm; }
+
+  .tipp { font-size: 8.5pt; color: #666; font-style: italic; margin: -1mm 0 4mm 9.5mm; }
+
+  /* Tagesziel-Kasten */
+  .kasten { border: 1.5pt solid #999; border-radius: 2.5mm; padding: 4mm 5mm; background: #fafafa; }
+  .kasten.gelb { background: #fffbeb; border-color: #d4a72c; }
+  .kasten .titel { font-size: 8.5pt; letter-spacing: 2pt; text-transform: uppercase;
+                   color: #6b7280; font-weight: 700; margin-bottom: 2.5mm; }
+
+  .gross { font-size: 13pt; }
+  .gross .lin-inline { border-bottom: 1.5pt solid #111; display: inline-block;
+                       min-width: 16mm; text-align: center; }
+
+  /* Unterschriften */
+  .unter { display: flex; gap: 6mm; margin-top: 8mm; }
+  .unter .u { flex: 1; }
+  .unter .strich { border-bottom: 1pt solid #111; height: 12mm; }
+  .unter .wer { font-size: 8.5pt; color: #555; margin-top: 1.5mm; }
+
+  .fuss { margin-top: 5mm; font-size: 8pt; color: #777; line-height: 1.6;
+          border-top: 1pt solid #ddd; padding-top: 3mm; }
+
+  /* ---- Seite 2: Tageskarten ---- */
+  .karte {
+    border: 1.5pt dashed #666; border-radius: 2.5mm;
+    padding: 4mm 5mm; margin-bottom: 6mm; height: 78mm;
+    display: flex; flex-direction: column;
+  }
+  .karte .kopf { display: flex; justify-content: space-between; align-items: baseline;
+                 border-bottom: 1pt solid #ccc; padding-bottom: 2mm; margin-bottom: 3mm; }
+  .karte .kopf .t { font-size: 12pt; font-weight: 700; }
+  .karte .kopf .m { font-size: 8.5pt; color: #555; }
+  .karte .kopf .m span { border-bottom: 0.75pt solid #999; display: inline-block; min-width: 22mm; }
+
+  table.raster { width: 100%; border-collapse: collapse; }
+  table.raster th, table.raster td { border: 0.75pt solid #999; text-align: center; }
+  table.raster thead th { background: #eee; font-size: 8pt; padding: 1.2mm 0; }
+  table.raster th.zielsp { text-align: left; padding-left: 2mm; width: 46mm; background: #f5f5f5;
+                           font-weight: 400; font-size: 9pt; }
+  table.raster tbody td { height: 8mm; }
+
+  .karte .fussz { margin-top: auto; display: flex; justify-content: space-between;
+                  align-items: center; font-size: 9pt; padding-top: 2.5mm;
+                  border-top: 1pt solid #ccc; }
+  .karte .fussz b { font-size: 10pt; }
+  .karte .fussz .lin-inline { border-bottom: 1pt solid #111; display: inline-block;
+                              min-width: 12mm; text-align: center; }
+
+  .schere { text-align: center; color: #999; font-size: 8pt; letter-spacing: 3pt; margin: -3mm 0 3mm; }
+
+  @media screen {
+    body { background: #ccc; padding: 12mm; }
+    .seite { background: #fff; padding: 14mm; box-shadow: 0 2px 14px rgba(0,0,0,.3);
+             max-width: 210mm; margin: 0 auto 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SEITE 1: Die Vereinbarung ============ -->
+<div class="seite">
+
+  <header>
+    <div class="kicker">Verhaltenskonzept Jahrgang 5/6 &middot; Baustein 3</div>
+    <h1>Unsere Vereinbarung</h1>
+    <div class="lead">Befristet auf sechs Wochen. Wird danach gemeinsam überprüft.</div>
+  </header>
+
+  <div class="zeile">
+    <div class="f" style="flex:2"><label>Name</label><div class="lin"></div></div>
+    <div class="f"><label>Klasse</label><div class="lin"></div></div>
+  </div>
+  <div class="zeile">
+    <div class="f"><label>Vereinbart am</label><div class="lin"></div></div>
+    <div class="f"><label>Läuft bis (6 Wochen)</label><div class="lin"></div></div>
+    <div class="f"><label>Gespräch am</label><div class="lin"></div></div>
+  </div>
+
+  <h2>Das nehme ich mir vor</h2>
+  <div class="ziel"><div class="nr">1</div><div class="lin"></div></div>
+  <div class="ziel"><div class="nr">2</div><div class="lin"></div></div>
+  <div class="ziel"><div class="nr">3</div><div class="lin"></div></div>
+  <div class="tipp">Positiv formuliert und beobachtbar. Beispiel: &bdquo;Ich hole mein Material in den ersten zwei Minuten raus.&ldquo; &mdash; nicht: &bdquo;Ich störe nicht.&ldquo;</div>
+
+  <h2>Mein Tagesziel</h2>
+  <div class="kasten gelb">
+    <div class="titel">So viele Häkchen brauche ich pro Tag</div>
+    <div class="gross">
+      Ich schaffe <span class="lin-inline">&nbsp;</span> von <span class="lin-inline">&nbsp;</span> Häkchen.
+    </div>
+    <div style="font-size:8.5pt; color:#666; margin-top:2.5mm;">
+      <b>Wichtig:</b> Das Ziel muss von Anfang an erreichbar sein. Wer bisher bei etwa 40 % liegt, startet
+      nicht bei 90 %. Lieber niedrig ansetzen und später anheben.
+    </div>
+  </div>
+
+  <h2>Wenn ich mein Tagesziel schaffe</h2>
+  <div class="zeile">
+    <div class="f"><label>In der Schule</label><div class="lin"></div></div>
+    <div class="f"><label>Zu Hause</label><div class="lin"></div></div>
+  </div>
+  <div class="zeile">
+    <div class="f"><label>Am Ende der Woche (wenn ich es an <span style="border-bottom:0.75pt solid #999; padding:0 3mm;">&nbsp;</span> Tagen geschafft habe)</label><div class="lin"></div></div>
+  </div>
+
+  <h2>Wie wir wieder aufhören</h2>
+  <div class="kasten">
+    <div style="line-height:1.7;">
+      <b>Woche 1&ndash;3:</b> Häkchen in jeder Stunde, Auswertung jeden Tag.<br>
+      <b>Woche 4&ndash;5:</b> Auswertung nur noch jeden zweiten Tag.<br>
+      <b>Woche 6:</b> Auswertung einmal in der Woche.<br>
+      <b>Danach:</b> Gespräch &mdash; beenden, anpassen oder verlängern.
+    </div>
+    <div style="font-size:8.5pt; color:#666; margin-top:3mm;">
+      Das Ziel ist, dass die Karte irgendwann nicht mehr gebraucht wird. Das ist von Anfang an so geplant.
+    </div>
+  </div>
+
+  <div class="unter">
+    <div class="u"><div class="strich"></div><div class="wer">Schülerin / Schüler</div></div>
+    <div class="u"><div class="strich"></div><div class="wer">Eltern / Erziehungsberechtigte</div></div>
+    <div class="u"><div class="strich"></div><div class="wer">Klassenleitung</div></div>
+  </div>
+
+  <div class="fuss">
+    <b>Für die Lehrkräfte:</b> Ein Häkchen pro Ziel am Stundenende, etwa zehn Sekunden. Im Zweifel großzügig sein &mdash;
+    die Karte soll Erfolge sichtbar machen, nicht Lücken dokumentieren.<br>
+    <b>Die Karte gehört dem Kind.</b> Sie wird nicht ausgehängt, nicht herumgezeigt und nicht dort besprochen, wo Dritte mithören.<br>
+    <b>Datenschutz:</b> Ausschließlich in Papierform. Keine Erfassung auf privaten Geräten oder online &mdash;
+    individuelle Verhaltensdaten sind in Anlage 3 VO-DV I nicht als zulässig gelistet. Aufbewahrung verschlossen in der Schule.
+  </div>
+
+</div>
+
+<!-- ============ SEITE 2: Tageskarten ============ -->
+<div class="seite">
+
+  <header>
+    <div class="kicker">Zum Ausschneiden &middot; eine Karte pro Tag</div>
+    <h1>Meine Tageskarte</h1>
+  </header>
+
+  <div class="karte">
+    <div class="kopf">
+      <div class="t">Meine Tageskarte</div>
+      <div class="m">Name <span></span> &nbsp; Datum <span></span></div>
+    </div>
+    <table class="raster">
+      <thead>
+        <tr><th class="zielsp">Mein Ziel</th>
+          <th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th><th>7.</th><th>8.</th></tr>
+      </thead>
+      <tbody>
+        <tr><th class="zielsp">1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th class="zielsp">2</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th class="zielsp">3</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="fussz">
+      <div>Häkchen heute: <b class="lin-inline">&nbsp;</b> &nbsp; Mein Ziel: <b class="lin-inline">&nbsp;</b></div>
+      <div><b>Geschafft?</b> &nbsp; ☐ ja &nbsp; ☐ fast</div>
+      <div>Eltern: <span style="border-bottom:1pt solid #999; display:inline-block; min-width:26mm;">&nbsp;</span></div>
+    </div>
+  </div>
+
+  <div class="schere">&#9986; &nbsp;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;</div>
+
+  <div class="karte">
+    <div class="kopf">
+      <div class="t">Meine Tageskarte</div>
+      <div class="m">Name <span></span> &nbsp; Datum <span></span></div>
+    </div>
+    <table class="raster">
+      <thead>
+        <tr><th class="zielsp">Mein Ziel</th>
+          <th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th><th>7.</th><th>8.</th></tr>
+      </thead>
+      <tbody>
+        <tr><th class="zielsp">1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th class="zielsp">2</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th class="zielsp">3</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="fussz">
+      <div>Häkchen heute: <b class="lin-inline">&nbsp;</b> &nbsp; Mein Ziel: <b class="lin-inline">&nbsp;</b></div>
+      <div><b>Geschafft?</b> &nbsp; ☐ ja &nbsp; ☐ fast</div>
+      <div>Eltern: <span style="border-bottom:1pt solid #999; display:inline-block; min-width:26mm;">&nbsp;</span></div>
+    </div>
+  </div>
+
+  <div class="schere">&#9986; &nbsp;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;</div>
+
+  <div class="karte">
+    <div class="kopf">
+      <div class="t">Meine Tageskarte</div>
+      <div class="m">Name <span></span> &nbsp; Datum <span></span></div>
+    </div>
+    <table class="raster">
+      <thead>
+        <tr><th class="zielsp">Mein Ziel</th>
+          <th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th><th>7.</th><th>8.</th></tr>
+      </thead>
+      <tbody>
+        <tr><th class="zielsp">1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th class="zielsp">2</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th class="zielsp">3</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="fussz">
+      <div>Häkchen heute: <b class="lin-inline">&nbsp;</b> &nbsp; Mein Ziel: <b class="lin-inline">&nbsp;</b></div>
+      <div><b>Geschafft?</b> &nbsp; ☐ ja &nbsp; ☐ fast</div>
+      <div>Eltern: <span style="border-bottom:1pt solid #999; display:inline-block; min-width:26mm;">&nbsp;</span></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

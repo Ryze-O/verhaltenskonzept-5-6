@@ -1,0 +1,9 @@
+# Windows / Editoren
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+~$*
+
+# Lokale Notizen, die nicht ins Repo gehoeren
+/privat/

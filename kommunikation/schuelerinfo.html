@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>So läuft das KlasseKinderSpiel</title>
+<style>
+  @page { size: A4 portrait; margin: 12mm; }
+  * { box-sizing: border-box; }
+
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; font-size: 12pt; line-height: 1.5; }
+
+  .seite { page-break-after: always; }
+  .seite:last-child { page-break-after: auto; }
+
+  header { text-align: center; margin-bottom: 8mm; }
+  .kicker { font-size: 10pt; letter-spacing: 2.5pt; text-transform: uppercase;
+            color: #6b7280; font-weight: 700; }
+  h1 { font-size: 34pt; margin: 2mm 0 0; letter-spacing: -1pt; line-height: 1.05; }
+  .unter { font-size: 13pt; color: #444; margin-top: 3mm; }
+
+  h2 { font-size: 16pt; margin: 8mm 0 3mm; }
+
+  /* Schritte */
+  .schritt { display: flex; gap: 5mm; align-items: flex-start; margin-bottom: 5mm; }
+  .nr {
+    flex-shrink: 0; width: 11mm; height: 11mm; border-radius: 50%;
+    background: #111; color: #fff; font-weight: 700; font-size: 15pt;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .schritt .txt { padding-top: 1.5mm; }
+  .schritt b { display: block; font-size: 13pt; margin-bottom: 1mm; }
+
+  /* Große Botschaft */
+  .knaller {
+    border: 3pt solid #111; border-radius: 4mm;
+    background: #fffbeb; padding: 6mm 7mm; text-align: center;
+    margin: 8mm 0;
+  }
+  .knaller .gross { font-size: 21pt; font-weight: 700; line-height: 1.25; }
+  .knaller .klein { font-size: 12pt; color: #444; margin-top: 3mm; }
+
+  /* Fragen */
+  .frage { border-left: 3.5pt solid #111; padding-left: 5mm; margin-bottom: 5mm; }
+  .frage b { display: block; font-size: 13pt; margin-bottom: 1mm; }
+
+  /* Rechnung */
+  .rechnung {
+    display: flex; align-items: center; justify-content: center; gap: 5mm;
+    border: 1.5pt solid #999; border-radius: 3mm; padding: 5mm; margin: 5mm 0;
+    background: #fafafa; flex-wrap: wrap;
+  }
+  .rechnung .kasten { text-align: center; }
+  .rechnung .zahl { font-size: 24pt; font-weight: 700; line-height: 1.1; }
+  .rechnung .wort { font-size: 10pt; color: #555; }
+  .rechnung .op { font-size: 20pt; color: #999; font-weight: 300; }
+
+  .fuss { margin-top: 8mm; padding-top: 4mm; border-top: 1.5pt solid #ddd;
+          font-size: 11pt; color: #555; text-align: center; }
+
+  @media screen {
+    body { background: #ccc; padding: 12mm; }
+    .seite { background: #fff; padding: 15mm; box-shadow: 0 2px 14px rgba(0,0,0,.3);
+             max-width: 210mm; margin: 0 auto 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="seite">
+
+  <header>
+    <div class="kicker">Neu in unserer Klasse</div>
+    <h1>Das KlasseKinderSpiel</h1>
+    <div class="unter">Wie ihr gemeinsam Zeit gewinnt</div>
+  </header>
+
+  <h2>So geht das Spiel</h2>
+
+  <div class="schritt">
+    <div class="nr">1</div>
+    <div class="txt">
+      <b>Wir machen zusammen Regeln.</b>
+      Vier Stück. Ihr überlegt sie euch selbst &mdash; sie hängen dann als Plakat im Klassenraum.
+    </div>
+  </div>
+
+  <div class="schritt">
+    <div class="nr">2</div>
+    <div class="txt">
+      <b>Eure Tischgruppe ist euer Team.</b>
+      Ihr spielt zusammen, nicht allein.
+    </div>
+  </div>
+
+  <div class="schritt">
+    <div class="nr">3</div>
+    <div class="txt">
+      <b>Die Lehrerin sagt an, wann das Spiel losgeht.</b>
+      Meistens für zehn bis zwanzig Minuten. Danach ist es wieder vorbei.
+    </div>
+  </div>
+
+  <div class="schritt">
+    <div class="nr">4</div>
+    <div class="txt">
+      <b>Wird eine Regel gebrochen, bekommt das Team einen Strich.</b>
+      Ganz ohne Schimpfen. Es wird auch kein Name gesagt.
+    </div>
+  </div>
+
+  <div class="schritt">
+    <div class="nr">5</div>
+    <div class="txt">
+      <b>Am Ende zählen wir.</b>
+      Jedes Team mit <b>höchstens 3 Strichen</b> hat gewonnen.
+    </div>
+  </div>
+
+  <div class="schritt">
+    <div class="nr">6</div>
+    <div class="txt">
+      <b>Für jedes Team, das gewinnt, gibt es eine Minute.</b>
+      Die kommt auf euren Zeitsparer &mdash; für die ganze Klasse.
+    </div>
+  </div>
+
+  <div class="rechnung">
+    <div class="kasten"><div class="zahl">5</div><div class="wort">Teams gewinnen</div></div>
+    <div class="op">&rarr;</div>
+    <div class="kasten"><div class="zahl">5</div><div class="wort">Minuten für alle</div></div>
+    <div class="op">&rarr;</div>
+    <div class="kasten"><div class="zahl">&#9203;</div><div class="wort">auf den Zeitsparer</div></div>
+  </div>
+
+  <div class="knaller">
+    <div class="gross">Alle Teams können gleichzeitig gewinnen!</div>
+    <div class="klein">Ihr spielt <b>nicht gegeneinander</b>. Ihr spielt alle zusammen gegen die vier Striche.</div>
+  </div>
+
+</div>
+
+<div class="seite">
+
+  <header>
+    <div class="kicker">Was ihr bestimmt wissen wollt</div>
+    <h1>Eure Fragen</h1>
+  </header>
+
+  <div class="frage">
+    <b>Was passiert mit dem Zeitfresser-Strahl?</b>
+    Den gibt es nicht mehr. Euer Name steht ab jetzt nirgends mehr an der Wand.
+    Dass man zügig anfangen soll, bleibt trotzdem wichtig &mdash; das ist jetzt eine der Regeln im Spiel.
+  </div>
+
+  <div class="frage">
+    <b>Und die Ampel?</b>
+    Die bleibt. Sie ist für den Notfall da, wenn etwas richtig aus dem Ruder läuft.
+    Neu ist: Ihr fangt jetzt bei <b>Weiß</b> an. Früher war Grün schon die erste Ermahnung &mdash; das war verwirrend.
+  </div>
+
+  <div class="frage">
+    <b>Kann ich mein Team ruinieren?</b>
+    Nein. Die Grenze ist mit Absicht so gesetzt, dass ein einzelnes Kind das Team nicht kippen kann.
+    Und wenn ein Team es öfter nicht schafft, machen wir die Grenze größer &mdash; nicht das Kind zum Problem.
+  </div>
+
+  <div class="frage">
+    <b>Kann ich von einer Belohnung ausgeschlossen werden?</b>
+    <b>Nein. Niemals.</b> Wenn die Klasse etwas verdient hat, ist die ganze Klasse dabei. Ohne Ausnahme.
+  </div>
+
+  <div class="frage">
+    <b>Gibt es Punkte für gute Noten?</b>
+    Nein. Es geht nur darum, wie wir zusammen arbeiten. Nicht darum, wer was kann oder wer schneller fertig ist.
+  </div>
+
+  <div class="frage">
+    <b>Kommt das ins Zeugnis?</b>
+    Nein. Gar nichts davon.
+  </div>
+
+  <div class="frage">
+    <b>Wofür können wir die Minuten ausgeben?</b>
+    Das bestimmt ihr selbst! Wir machen zusammen eine Liste &mdash; zum Beispiel Spielzeit, Musik beim Arbeiten,
+    Sitzplatz aussuchen oder ein Klassenfrühstück. Ihr dürft auch über die Preise verhandeln.
+  </div>
+
+  <div class="frage">
+    <b>Warum machen wir das überhaupt?</b>
+    Weil bisher vor allem aufgefallen ist, wenn etwas <i>nicht</i> geklappt hat.
+    Wenn ihr euch angestrengt habt, hat das kaum jemand gesehen. Das drehen wir jetzt um.
+  </div>
+
+  <div class="fuss">
+    Fragen? Sprecht uns einfach an.<br>
+    <b>Wir fangen an am:</b> <span style="border-bottom:1.5pt solid #999; display:inline-block; min-width:45mm;">&nbsp;</span>
+  </div>
+
+</div>
+
+</body>
+</html>

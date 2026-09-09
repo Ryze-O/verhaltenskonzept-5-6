@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Ampel — überarbeitete Vorlage</title>
+<style>
+  @page { size: A4 portrait; margin: 10mm; }
+  * { box-sizing: border-box; }
+
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; font-size: 10pt; }
+
+  .seite { page-break-after: always; }
+  .seite:last-child { page-break-after: auto; }
+
+  header { border-bottom: 2pt solid #111; padding-bottom: 2.5mm; margin-bottom: 4mm;
+           display: flex; justify-content: space-between; align-items: flex-end; }
+  h1 { font-size: 20pt; margin: 0; letter-spacing: -0.5pt; }
+  .klasse { font-size: 10pt; }
+  .klasse span { border-bottom: 1pt solid #111; display: inline-block; min-width: 30mm; }
+
+  /* Skalenkopf */
+  .skala { display: flex; margin-bottom: 1mm; }
+  .skala .namensspalte { width: 52mm; flex-shrink: 0; }
+  .skala .stufe {
+    flex: 1; text-align: center; padding: 2mm 1mm;
+    font-weight: 700; font-size: 9.5pt; border: 1pt solid #666;
+    border-right: none;
+  }
+  .skala .stufe:last-child { border-right: 1pt solid #666; }
+  .s-weiss  { background: #ffffff; }
+  .s-gelb   { background: #fde047; }
+  .s-orange { background: #fb923c; }
+  .s-rot    { background: #ef4444; color: #fff; }
+  .stufe small { display: block; font-weight: 400; font-size: 7.5pt; margin-top: 0.5mm; }
+  .s-rot small { color: #ffe4e4; }
+
+  /* Namensliste */
+  .zeile { display: flex; height: 8.4mm; }
+  .zeile:nth-child(even) .name { background: #f7f7f7; }
+  .name {
+    width: 52mm; flex-shrink: 0;
+    border: 0.5pt solid #bbb; border-top: none;
+    padding: 0 2mm; display: flex; align-items: center;
+  }
+  .feld { flex: 1; border: 0.5pt solid #bbb; border-top: none; border-left: none; }
+  .f-weiss  { background: #ffffff; }
+  .f-gelb   { background: #fef9c3; }
+  .f-orange { background: #ffedd5; }
+  .f-rot    { background: #fee2e2; }
+  .zeile:first-of-type .name,
+  .zeile:first-of-type .feld { border-top: 0.5pt solid #bbb; }
+
+  .hinweis { margin-top: 4mm; font-size: 8.5pt; color: #555; line-height: 1.6;
+             border-top: 1pt solid #ddd; padding-top: 3mm; }
+  .hinweis b { color: #111; }
+
+  /* Sichtschutz-Seite */
+  .schutz {
+    height: 265mm; border: 3pt solid #111; border-radius: 4mm;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 20mm;
+  }
+  .schutz .gross { font-size: 40pt; font-weight: 700; line-height: 1.15; letter-spacing: -1pt; }
+  .schutz .klein { font-size: 13pt; color: #555; margin-top: 8mm; line-height: 1.6; max-width: 130mm; }
+
+  @media screen {
+    body { background: #ccc; padding: 12mm; }
+    .seite { background: #fff; padding: 14mm; box-shadow: 0 2px 14px rgba(0,0,0,.3);
+             max-width: 210mm; margin: 0 auto 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SEITE 1: Ampelliste ============ -->
+<div class="seite">
+  <header>
+    <h1>Ampel</h1>
+    <div class="klasse">Klasse <span></span> &nbsp; Woche <span></span></div>
+  </header>
+
+  <div class="skala">
+    <div class="namensspalte"></div>
+    <div class="stufe s-weiss">Start<small>alles in Ordnung</small></div>
+    <div class="stufe s-gelb">1. Ermahnung<small>Gelb</small></div>
+    <div class="stufe s-orange">2. Ermahnung<small>Orange</small></div>
+    <div class="stufe s-rot">3. Ermahnung<small>Auszeitzettel</small></div>
+  </div>
+
+  <div class="liste">
+    <!-- 28 Zeilen -->
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+    <div class="zeile"><div class="name"></div><div class="feld f-weiss"></div><div class="feld f-gelb"></div><div class="feld f-orange"></div><div class="feld f-rot"></div></div>
+  </div>
+
+  <div class="hinweis">
+    <b>Was sich geändert hat:</b> Das Startfeld ist jetzt <b>weiß</b>. Bisher stand Grün für die erste Ermahnung &mdash;
+    ein Kind auf Grün war also bereits auffällig geworden, sah aber vorbildlich aus. Wer nichts getan hat, steht jetzt auf Weiß.<br>
+    <b>Reset:</b> [ANPASSEN: jede Stunde / jeden Tag] &nbsp;&middot;&nbsp;
+    <b>Elterninformation ab:</b> [ANPASSEN] &nbsp;&middot;&nbsp;
+    <b>Bei Rot:</b> Auszeitzettel am Extratisch, bei weiterem Verstoß Auszeitraum &mdash; unverändert.<br>
+    <b>Datenschutz:</b> Diese Liste ist eine Verhaltensbewertung mit Namen. Sie darf für fachfremde Personen nicht
+    einsehbar sein &mdash; Sichtschutz (Seite 2) verwenden oder die Liste an einer nicht öffentlich einsehbaren Stelle führen.
+  </div>
+</div>
+
+<!-- ============ SEITE 2: Sichtschutz ============ -->
+<div class="seite">
+  <div class="schutz">
+    <div class="gross">Diese Seite<br>bitte umklappen</div>
+    <div class="klein">
+      Auf ein A4-Blatt drucken und als Klappe über die Ampelliste kleben.<br><br>
+      Wird der Raum von einer anderen Klasse, von Vertretungskräften, bei Elternabenden
+      oder für Veranstaltungen genutzt, bleibt die Liste zugeklappt.<br><br>
+      <b>Grund:</b> Eine Namensliste, an der ablesbar ist, wie sich ein einzelnes Kind
+      verhalten hat, ist eine personenbezogene Verhaltensbewertung. Sie gehört nicht
+      vor die Augen unbeteiligter Dritter.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

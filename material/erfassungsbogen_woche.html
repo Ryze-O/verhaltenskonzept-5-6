@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Wochenblatt KlasseKinderSpiel</title>
+<style>
+  @page { size: A4 landscape; margin: 8mm; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    margin: 0;
+    padding: 8mm;
+    color: #111;
+    font-size: 10pt;
+  }
+
+  .sheet { max-width: 277mm; margin: 0 auto; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2.5pt solid #111;
+    padding-bottom: 2mm;
+    margin-bottom: 3mm;
+  }
+
+  h1 { font-size: 15pt; margin: 0; letter-spacing: -0.2pt; }
+  .sub { font-size: 8.5pt; color: #555; margin-top: 1mm; }
+
+  .meta { display: flex; gap: 6mm; font-size: 9.5pt; }
+  .meta span { border-bottom: 1pt solid #111; min-width: 28mm; display: inline-block; padding-bottom: 0.5mm; }
+  .meta label { font-weight: 600; margin-right: 1.5mm; }
+
+  /* --- Regelleiste --- */
+  .regeln {
+    display: flex;
+    gap: 3mm;
+    margin-bottom: 3mm;
+  }
+  .regel {
+    flex: 1;
+    border: 1pt solid #999;
+    border-radius: 1.5mm;
+    padding: 1.5mm 2mm;
+    min-height: 9mm;
+    background: #fafafa;
+  }
+  .regel b { font-size: 7.5pt; color: #777; display: block; letter-spacing: 0.3pt; }
+
+  /* --- Haupttabelle --- */
+  table { width: 100%; border-collapse: collapse; }
+
+  th, td { border: 0.75pt solid #666; padding: 0; text-align: center; }
+
+  thead th {
+    background: #eee;
+    font-size: 8.5pt;
+    padding: 1.5mm 1mm;
+    font-weight: 600;
+  }
+  thead th.team { background: #ddd; }
+
+  td.datum, td.fach { text-align: left; padding: 0 1.5mm; }
+
+  tbody tr { height: 13mm; }
+  tbody tr:nth-child(even) { background: #f7f7f7; }
+
+  /* Foul-Kästchen */
+  .fouls { display: flex; justify-content: center; gap: 1.2mm; }
+  .box {
+    width: 4.5mm; height: 4.5mm;
+    border: 0.75pt solid #444;
+    border-radius: 0.7mm;
+    background: #fff;
+  }
+  .box.limit { border-color: #c0392b; border-width: 1.2pt; }
+
+  col.c-datum { width: 17mm; }
+  col.c-fach  { width: 20mm; }
+  col.c-team  { width: 27mm; }
+  col.c-gew   { width: 18mm; }
+  col.c-min   { width: 16mm; }
+
+  /* --- Fußzeile --- */
+  footer {
+    margin-top: 3mm;
+    display: flex;
+    gap: 4mm;
+    align-items: stretch;
+  }
+  .kasten {
+    border: 1pt solid #999;
+    border-radius: 1.5mm;
+    padding: 2mm 2.5mm;
+    font-size: 8.5pt;
+    line-height: 1.45;
+  }
+  .kasten b { display: block; font-size: 8pt; letter-spacing: 0.3pt; color: #444; margin-bottom: 1mm; text-transform: uppercase; }
+  .anleitung { flex: 2; }
+  .summe { flex: 1; background: #f2f2f2; }
+  .summe .zeile { display: flex; justify-content: space-between; padding: 0.8mm 0; border-bottom: 0.5pt dotted #aaa; }
+  .summe .zeile:last-child { border: none; font-weight: 700; }
+  .summe .wert { min-width: 16mm; border-bottom: 1pt solid #111; }
+
+  .hinweis { flex: 1.3; background: #fff8e6; border-color: #d4a72c; }
+
+  .anleitung ol { margin: 0; padding-left: 4mm; }
+  .anleitung li { margin-bottom: 0.6mm; }
+
+  @media screen {
+    body { background: #ccc; padding: 10mm; }
+    .sheet { background: #fff; padding: 10mm; box-shadow: 0 2px 12px rgba(0,0,0,.3); }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div>
+      <h1>KlasseKinderSpiel &mdash; Wochenblatt</h1>
+      <div class="sub">Ein Blatt pro Woche. Bleibt im Klassenordner. Foul-Limit: <b>4</b> &middot; Pro gewinnendes Team: <b>1 Minute</b> auf den Zeitsparer.</div>
+    </div>
+    <div class="meta">
+      <div><label>Klasse</label><span></span></div>
+      <div><label>Woche vom</label><span></span></div>
+    </div>
+  </header>
+
+  <div class="regeln">
+    <div class="regel"><b>REGEL 1</b></div>
+    <div class="regel"><b>REGEL 2</b></div>
+    <div class="regel"><b>REGEL 3</b></div>
+    <div class="regel"><b>REGEL 4</b></div>
+  </div>
+
+  <table>
+    <colgroup>
+      <col class="c-datum"><col class="c-fach">
+      <col class="c-team"><col class="c-team"><col class="c-team">
+      <col class="c-team"><col class="c-team"><col class="c-team">
+      <col class="c-gew"><col class="c-min">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Fach</th>
+        <th class="team">Team 1</th>
+        <th class="team">Team 2</th>
+        <th class="team">Team 3</th>
+        <th class="team">Team 4</th>
+        <th class="team">Team 5</th>
+        <th class="team">Team 6</th>
+        <th>Teams<br>gewonnen</th>
+        <th>Minuten</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 8 Spielrunden -->
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+      <tr><td class="datum"></td><td class="fach"></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td><div class="fouls"><i class="box"></i><i class="box"></i><i class="box"></i><i class="box limit"></i></div></td>
+        <td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <div class="kasten anleitung">
+      <b>So geht's &mdash; 30 Sekunden pro Stunde</b>
+      <ol>
+        <li>Ansagen: &bdquo;Wir spielen jetzt <u>&nbsp;&nbsp;&nbsp;&nbsp;</u> Minuten das KlasseKinderSpiel.&ldquo;</li>
+        <li>Regelverstoß? <b>Wortlos ein Kästchen ankreuzen</b> beim Team. Kein Kommentar, kein Name.</li>
+        <li>Am Ende: Jedes Team mit <b>höchstens 3 Kreuzen</b> hat gewonnen. (Das rote Kästchen ist das Limit.)</li>
+        <li>Anzahl gewinnender Teams eintragen &rarr; ebenso viele Minuten auf den Zeitsparer.</li>
+      </ol>
+    </div>
+
+    <div class="kasten hinweis">
+      <b>Nicht vergessen</b>
+      <div>&bull; Alle Teams können <b>gleichzeitig</b> gewinnen &mdash; sie spielen gegen das Limit, nicht gegeneinander.</div>
+      <div>&bull; <b>Kein Kind</b> wird von der Belohnung ausgeschlossen.</div>
+      <div>&bull; Punkte gibt es <b>nur für Verhalten</b>, nie für Leistung.</div>
+      <div>&bull; Ampel bleibt die Notbremse, nicht die erste Reaktion.</div>
+    </div>
+
+    <div class="kasten summe">
+      <b>Zeitsparer</b>
+      <div class="zeile"><span>Übertrag Vorwoche</span><span class="wert"></span></div>
+      <div class="zeile"><span>Diese Woche</span><span class="wert"></span></div>
+      <div class="zeile"><span>Eingelöst</span><span class="wert"></span></div>
+      <div class="zeile"><span>Neuer Stand</span><span class="wert"></span></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

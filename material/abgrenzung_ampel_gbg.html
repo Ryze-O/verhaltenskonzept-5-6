@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Ampel oder Spiel? — Entscheidungshilfe</title>
+<style>
+  @page { size: A4 portrait; margin: 12mm; }
+  * { box-sizing: border-box; }
+
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; font-size: 10.5pt; }
+
+  header { border-bottom: 2.5pt solid #111; padding-bottom: 3mm; margin-bottom: 6mm; }
+  .kicker { font-size: 8.5pt; letter-spacing: 2.5pt; text-transform: uppercase;
+            color: #6b7280; font-weight: 600; }
+  h1 { font-size: 26pt; margin: 1mm 0 0; letter-spacing: -0.6pt; }
+  .lead { font-size: 10pt; color: #555; margin-top: 2mm; }
+
+  /* Faustregel */
+  .faustregel {
+    border: 2.5pt solid #111; border-radius: 3mm;
+    background: #fffbeb;
+    padding: 5mm 6mm; margin-bottom: 7mm;
+  }
+  .faustregel .titel { font-size: 8.5pt; letter-spacing: 2pt; text-transform: uppercase;
+                       color: #92700e; font-weight: 700; margin-bottom: 2mm; }
+  .faustregel p { margin: 0 0 2mm; font-size: 14pt; font-weight: 700; line-height: 1.35; }
+  .faustregel .zusatz { font-size: 10pt; font-weight: 400; color: #444; margin: 0; }
+
+  /* Tabelle */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 7mm; }
+  th, td { padding: 2.5mm 3mm; text-align: left; border-bottom: 0.75pt solid #ccc;
+           vertical-align: top; }
+  thead th { border-bottom: 1.5pt solid #111; font-size: 12pt; }
+  thead th:first-child { width: 26mm; }
+  thead .ampel { color: #b45309; }
+  thead .spiel { color: #1d4ed8; }
+  tbody th { font-weight: 600; color: #6b7280; font-size: 9.5pt; }
+
+  /* Ablauf */
+  h2 { font-size: 12pt; margin: 0 0 3mm; padding-bottom: 1.5mm;
+       border-bottom: 1.5pt solid #d0d0d0; letter-spacing: 0.3pt; }
+
+  .schritte { display: flex; flex-direction: column; gap: 2.5mm; margin-bottom: 7mm; }
+  .schritt { display: flex; gap: 3.5mm; align-items: flex-start; }
+  .marke {
+    flex-shrink: 0; width: 7mm; height: 7mm; border-radius: 50%;
+    background: #111; color: #fff; font-weight: 700; font-size: 9pt;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .schritt .txt { padding-top: 0.6mm; line-height: 1.45; }
+
+  /* Tabus */
+  .tabus { border: 1.5pt solid #b91c1c; border-radius: 2.5mm; padding: 4mm 5mm; background: #fef2f2; }
+  .tabus .titel { font-size: 8.5pt; letter-spacing: 2pt; text-transform: uppercase;
+                  color: #b91c1c; font-weight: 700; margin-bottom: 2.5mm; }
+  .tabus ul { margin: 0; padding-left: 5mm; line-height: 1.6; }
+
+  .fuss { margin-top: 6mm; font-size: 8.5pt; color: #777; text-align: center; }
+
+  @media screen {
+    body { background: #ccc; padding: 12mm; }
+    .sheet { background: #fff; padding: 14mm; box-shadow: 0 2px 14px rgba(0,0,0,.3);
+             max-width: 210mm; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="kicker">Jahrgang 5/6 &middot; Für Klassenraum und Lehrerzimmer</div>
+    <h1>Ampel oder Spiel?</h1>
+    <div class="lead">Zwei Instrumente, zwei Aufgaben. Damit sie sich nicht in die Quere kommen.</div>
+  </header>
+
+  <div class="faustregel">
+    <div class="titel">Die Faustregel</div>
+    <p>Läuft gerade eine Spielphase? Dann ist ein Regelverstoß zuerst ein <b>Foul</b> &mdash; nicht die Ampel.</p>
+    <p class="zusatz">Die Ampel ist die Notbremse: bei ernsthafter Unterbrechung des Unterrichts oder Gefährdung. Sie ist nicht die erste Reaktion.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th></th><th class="ampel">Ampel</th><th class="spiel">KlasseKinderSpiel</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>Zweck</th><td>Grenzen ziehen</td><td>Verhalten aufbauen</td></tr>
+      <tr><th>Ebene</th><td>einzelnes Kind</td><td>Team</td></tr>
+      <tr><th>Auslöser</th><td>Regelverstoß trotz Ermahnung</td><td>läuft in Spielphasen dauerhaft mit</td></tr>
+      <tr><th>Sichtbarkeit</th><td>nur intern, verdeckt</td><td>Teamstriche, keine Namen</td></tr>
+      <tr><th>Reaktion</th><td>Eskalationsstufe, Magnet rückt</td><td>ein Strich, wortlos</td></tr>
+      <tr><th>Reset</th><td>jede Stunde</td><td>jede Spielrunde</td></tr>
+      <tr><th>Gilt</th><td>immer</td><td>nur in angekündigten Spielphasen</td></tr>
+      <tr><th>Eskalation</th><td>Auszeitzettel &rarr; Auszeitraum</td><td>keine &mdash; nur kein Gewinn in dieser Runde</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Wenn etwas passiert &mdash; in dieser Reihenfolge</h2>
+  <div class="schritte">
+    <div class="schritt"><div class="marke">1</div><div class="txt"><b>Läuft eine Spielphase?</b> Dann wortlos einen Strich beim Team. Fertig. Keine Ansprache, kein Name, keine Diskussion.</div></div>
+    <div class="schritt"><div class="marke">2</div><div class="txt"><b>Geht es weiter?</b> Kurze, ruhige Ermahnung an das Kind &mdash; jetzt persönlich, aber knapp.</div></div>
+    <div class="schritt"><div class="marke">3</div><div class="txt"><b>Wird der Unterricht ernsthaft unterbrochen?</b> Erst jetzt die Ampel. Magnet rückt eine Stufe.</div></div>
+    <div class="schritt"><div class="marke">4</div><div class="txt"><b>Rot erreicht?</b> Auszeitzettel am Extratisch. Bei weiterem Verstoß Auszeitraum mit Reflexionsgespräch &mdash; unverändert wie bisher.</div></div>
+  </div>
+
+  <div class="tabus">
+    <div class="titel">Drei Dinge, die nicht passieren dürfen</div>
+    <ul>
+      <li><b>Kein Kind von einer Klassenbelohnung ausschließen.</b> Auch nicht bei massivem Fehlverhalten &mdash; dafür ist die Ampel da. Ein Ausschluss wäre der Sache nach eine Ordnungsmaßnahme ohne das Verfahren nach § 53 SchulG NRW.</li>
+      <li><b>Keine Namen bei den Fouls.</b> Der Strich geht ans Team, nicht ans Kind. Sonst entsteht genau der Gruppendruck, den die Konstruktion vermeiden soll.</li>
+      <li><b>Keine Punkte für Leistung.</b> Nur für Verhalten. Nichts davon fließt in Noten oder Zeugnisbemerkungen ein.</li>
+    </ul>
+  </div>
+
+  <div class="fuss">
+    Verhaltenskonzept Jahrgang 5/6 &bdquo;Zeit gewinnen statt Zeit verlieren&ldquo; &middot;
+    Fragen an: <span style="border-bottom:0.75pt solid #999; display:inline-block; min-width:40mm;">&nbsp;</span>
+  </div>
+
+</div>
+</body>
+</html>

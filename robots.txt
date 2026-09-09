@@ -1,0 +1,7 @@
+# Schulinterne Unterlagen.
+# Die Seite ist technisch oeffentlich erreichbar, soll aber nicht
+# ueber Suchmaschinen auffindbar sein. Ergaenzend steht in jeder
+# Seite <meta name="robots" content="noindex,nofollow">.
+
+User-agent: *
+Disallow: /

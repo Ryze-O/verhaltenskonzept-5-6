@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Verstärker-Menü</title>
+<style>
+  @page { size: A3 portrait; margin: 12mm; }
+  * { box-sizing: border-box; }
+
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; color: #111; }
+
+  header { text-align: center; margin-bottom: 8mm; }
+  .kicker { font-size: 12pt; letter-spacing: 3pt; text-transform: uppercase;
+            color: #6b7280; font-weight: 600; }
+  h1 { font-size: 46pt; margin: 2mm 0 3mm; letter-spacing: -1.2pt; line-height: 1; }
+  .lead { font-size: 14pt; color: #444; }
+  .klasse { margin-top: 4mm; font-size: 13pt; color: #444; }
+  .klasse span { border-bottom: 1.5pt solid #999; display: inline-block; min-width: 40mm; }
+
+  .gruppe { margin-bottom: 7mm; }
+  .gruppe > h2 {
+    font-size: 13pt; letter-spacing: 1.5pt; text-transform: uppercase;
+    color: #6b7280; margin: 0 0 3mm; padding-bottom: 1.5mm;
+    border-bottom: 1.5pt solid #d0d0d0;
+  }
+
+  .zeile {
+    display: flex; align-items: center;
+    border-bottom: 1pt solid #ddd;
+    min-height: 13mm; padding: 0 2mm;
+  }
+  .zeile:nth-child(even) { background: #f8f8f8; }
+  .was { flex: 1; font-size: 16pt; }
+  .was.leer { border-bottom: 1pt dotted #bbb; margin-right: 8mm; height: 7mm; }
+  .preis {
+    width: 42mm; text-align: right; flex-shrink: 0;
+    font-size: 20pt; font-weight: 700; white-space: nowrap;
+  }
+  .preis.leer { border-bottom: 1.5pt solid #999; height: 8mm; }
+  .preis small { font-size: 12pt; font-weight: 400; color: #666; }
+
+  .stand {
+    margin-top: 8mm;
+    border: 3pt solid #111; border-radius: 3mm;
+    padding: 6mm 8mm;
+    display: flex; align-items: center; justify-content: space-between;
+    background: #fffbeb;
+  }
+  .stand .label { font-size: 20pt; font-weight: 700; }
+  .stand .zahl { font-size: 40pt; font-weight: 700;
+                 border-bottom: 2.5pt solid #111; min-width: 55mm;
+                 text-align: center; line-height: 1.1; }
+
+  .fuss { margin-top: 6mm; font-size: 11pt; color: #555; text-align: center; line-height: 1.6; }
+
+  @media screen {
+    body { background: #ccc; padding: 15mm; }
+    .sheet { background: #fff; padding: 15mm; box-shadow: 0 2px 16px rgba(0,0,0,.3);
+             max-width: 297mm; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="kicker">Zeitsparer</div>
+    <h1>Unser Verstärker-Menü</h1>
+    <div class="lead">Das haben wir gemeinsam ausgehandelt.</div>
+    <div class="klasse">Klasse <span></span> &nbsp;&middot;&nbsp; gültig ab <span></span></div>
+  </header>
+
+  <div class="gruppe">
+    <h2>Kleine Belohnungen</h2>
+    <div class="zeile"><div class="was">5 Minuten Spielzeit am Freitag</div><div class="preis">5 <small>Min</small></div></div>
+    <div class="zeile"><div class="was">Musik während der Stillarbeit (eine Stunde)</div><div class="preis">10 <small>Min</small></div></div>
+    <div class="zeile"><div class="was leer"></div><div class="preis leer"></div></div>
+    <div class="zeile"><div class="was leer"></div><div class="preis leer"></div></div>
+  </div>
+
+  <div class="gruppe">
+    <h2>Mittlere Belohnungen</h2>
+    <div class="zeile"><div class="was">Sitzplatzwahl für eine Woche</div><div class="preis">20 <small>Min</small></div></div>
+    <div class="zeile"><div class="was">Hausaufgaben-Joker für die ganze Klasse</div><div class="preis">30 <small>Min</small></div></div>
+    <div class="zeile"><div class="was leer"></div><div class="preis leer"></div></div>
+    <div class="zeile"><div class="was leer"></div><div class="preis leer"></div></div>
+  </div>
+
+  <div class="gruppe">
+    <h2>Große Belohnungen</h2>
+    <div class="zeile"><div class="was">Spielestunde</div><div class="preis">45 <small>Min</small></div></div>
+    <div class="zeile"><div class="was">Klassenfrühstück</div><div class="preis">60 <small>Min</small></div></div>
+    <div class="zeile"><div class="was leer"></div><div class="preis leer"></div></div>
+    <div class="zeile"><div class="was leer"></div><div class="preis leer"></div></div>
+  </div>
+
+  <div class="stand">
+    <div class="label">Unser Zeitsparer-Stand</div>
+    <div class="zahl">&nbsp;</div>
+  </div>
+
+  <div class="fuss">
+    Preise dürfen verhandelt werden &mdash; genau darum geht es.<br>
+    <b>Nächste Neuverhandlung im Klassenrat:</b> <span style="border-bottom:1pt solid #999; display:inline-block; min-width:35mm;">&nbsp;</span>
+  </div>
+
+</div>
+
+<!--
+  HINWEIS FÜR DIE KLASSENLEITUNG
+
+  Das Menü wird MIT DER KLASSE ausgehandelt (Fahrplan, Woche 1 / Stunde 2).
+  Die vorgedruckten Zeilen sind nur Anker - die Klasse darf sie ersetzen und die Preise verhandeln.
+
+  Reihenfolge nach Wirksamkeit und Nebenwirkungen:
+    1. ZEIT        (Spielzeit, freie Arbeitszeit, Vorlesezeit)        - kostenlos, beste Wirkung
+    2. PRIVILEGIEN (Sitzplatz, Musik, Joker, Dienste, Playlist)       - kostenlos
+    3. AKTIONEN    (Frühstück, Spielestunde, Filmstunde, Ausflug)     - Zeitfenster nötig
+    4. MATERIELLES - NUR wo eine Klassenkasse besteht. Überall optional.
+                     Das System funktioniert vollständig ohne Budget.
+
+  WICHTIG: Nach 8 Wochen neu verhandeln. Verstärker nutzen sich ab -
+  was im September zieht, zieht im November nicht mehr.
+
+  Erste Belohnung früh einlösen lassen, auch wenn es nur 5 Minuten sind.
+  Die Klasse muss erleben, dass das System wirklich auszahlt.
+
+  Jahrgang 7-10: andere Währung - Sitzordnungsfreiheit, Themenwahl bei Projekten,
+  Terminmitsprache, Handy-Regelung (nach Schulordnung prüfen). Weniger Spiel, mehr echte Rechte.
+-->
+</body>
+</html>

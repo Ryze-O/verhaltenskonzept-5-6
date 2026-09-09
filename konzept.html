@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Zeit gewinnen statt Zeit verlieren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#EEF1F1;
+  --surface:#FFFFFF;
+  --surface-2:#F6F8F8;
+  --ink:#16211F;
+  --ink-2:#54625F;
+  --ink-3:#849491;
+  --accent:#0F6B63;
+  --accent-ink:#0B524C;
+  --accent-soft:#DCEBE8;
+  --rule:#D2DBD9;
+  --rule-strong:#B4C1BE;
+  /* semantisch - ausschliesslich fuer die Ampel */
+  --a-gelb:#D9A20B;
+  --a-orange:#D0731F;
+  --a-rot:#B93A2C;
+  --warn-bg:#FBF3DF;
+  --warn-rule:#D9A20B;
+  --stop-bg:#FBEBE8;
+  --stop-rule:#B93A2C;
+
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1514;
+    --surface:#161F1E;
+    --surface-2:#1C2725;
+    --ink:#E4EDEB;
+    --ink-2:#9BAAA7;
+    --ink-3:#71827F;
+    --accent:#54C2B1;
+    --accent-ink:#7BD6C6;
+    --accent-soft:#173733;
+    --rule:#2A3735;
+    --rule-strong:#3C4C49;
+    --a-gelb:#E5BC46;
+    --a-orange:#E2924E;
+    --a-rot:#E0705F;
+    --warn-bg:#241E0E;
+    --warn-rule:#8A6A16;
+    --stop-bg:#25120F;
+    --stop-rule:#8A3A2E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1514;
+  --surface:#161F1E;
+  --surface-2:#1C2725;
+  --ink:#E4EDEB;
+  --ink-2:#9BAAA7;
+  --ink-3:#71827F;
+  --accent:#54C2B1;
+  --accent-ink:#7BD6C6;
+  --accent-soft:#173733;
+  --rule:#2A3735;
+  --rule-strong:#3C4C49;
+  --a-gelb:#E5BC46;
+  --a-orange:#E2924E;
+  --a-rot:#E0705F;
+  --warn-bg:#241E0E;
+  --warn-rule:#8A6A16;
+  --stop-bg:#25120F;
+  --stop-rule:#8A3A2E;
+}
+
+*{box-sizing:border-box}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- Zahlenstrahl-Motiv ---------- */
+.strahl{
+  height:9px;
+  background-image:
+    linear-gradient(to right,var(--rule-strong) 0 1px,transparent 1px 100%),
+    linear-gradient(var(--rule-strong),var(--rule-strong));
+  background-size:14px 5px,100% 1px;
+  background-position:0 100%,0 100%;
+  background-repeat:repeat-x,no-repeat;
+}
+
+/* ---------- Grundgerüst ---------- */
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 24px 96px;
+  display:grid;
+  grid-template-columns:212px minmax(0,1fr);
+  gap:56px;
+  align-items:start;
+}
+@media (max-width:940px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:0}
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  grid-column:1/-1;
+  padding:64px 0 40px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:40px;
+}
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:12px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:18px;
+}
+h1{
+  font-family:var(--f-display);
+  font-weight:500;
+  font-size:clamp(38px,6.2vw,68px);
+  line-height:1.03;
+  letter-spacing:-.02em;
+  margin:0 0 20px;
+  text-wrap:balance;
+  max-width:16ch;
+}
+.dek{
+  font-size:clamp(17px,2.1vw,20px);
+  color:var(--ink-2);
+  max-width:60ch;
+  margin:0 0 30px;
+}
+.dek b{color:var(--ink);font-weight:600}
+.herometa{
+  display:flex;flex-wrap:wrap;gap:10px 28px;
+  font-family:var(--f-mono);font-size:12.5px;color:var(--ink-3);
+}
+.herometa span b{color:var(--ink-2);font-weight:500}
+
+/* ---------- Navigation ---------- */
+nav{
+  position:sticky;top:20px;
+  font-size:13.5px;
+  line-height:1.45;
+}
+nav .navtitel{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink-3);
+  padding-bottom:10px;margin-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+nav ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+nav a{
+  display:flex;gap:9px;
+  color:var(--ink-2);text-decoration:none;
+  padding:5px 8px;border-radius:4px;
+  border-left:2px solid transparent;
+}
+nav a .n{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);padding-top:2px}
+nav a:hover{background:var(--surface);color:var(--ink)}
+nav a.aktiv{background:var(--accent-soft);color:var(--accent-ink);border-left-color:var(--accent);font-weight:500}
+nav a.aktiv .n{color:var(--accent)}
+@media (max-width:940px){
+  nav{position:static;margin-bottom:36px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:16px}
+  nav ol{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:2px}
+}
+
+/* ---------- Fliesstext ---------- */
+main{min-width:0}
+section{scroll-margin-top:24px;margin-bottom:56px}
+section > p,section > ul,section > ol{max-width:66ch}
+
+h2{
+  font-family:var(--f-display);
+  font-weight:500;font-size:clamp(26px,3.4vw,34px);
+  line-height:1.15;letter-spacing:-.015em;
+  margin:0 0 6px;text-wrap:balance;
+}
+.h2num{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:8px;
+}
+h2 + .strahl{margin:14px 0 26px;max-width:190px}
+h3{
+  font-family:var(--f-body);font-weight:600;font-size:18px;
+  letter-spacing:-.005em;margin:34px 0 8px;text-wrap:balance;
+}
+h4{font-family:var(--f-body);font-weight:600;font-size:15px;margin:22px 0 6px;color:var(--ink)}
+p{margin:0 0 15px}
+ul,ol{margin:0 0 15px;padding-left:22px}
+li{margin-bottom:7px}
+li::marker{color:var(--ink-3)}
+strong,b{font-weight:600}
+a{color:var(--accent-ink);text-decoration-color:var(--rule-strong);text-underline-offset:2px}
+a:focus-visible,nav a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+.lead{font-size:17.5px;color:var(--ink-2);max-width:62ch}
+
+/* ---------- Bausteine ---------- */
+.karten{display:grid;gap:14px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.karte{
+  background:var(--surface);border:1px solid var(--rule);
+  border-radius:7px;padding:18px 20px;
+}
+.karte .kicker{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;
+}
+.karte .gross{font-family:var(--f-display);font-size:30px;line-height:1.1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.karte p{font-size:14px;color:var(--ink-2);margin:0}
+
+.baustein{
+  background:var(--surface);border:1px solid var(--rule);
+  border-radius:8px;padding:22px 24px;margin-bottom:16px;
+}
+.baustein > .kopf{
+  display:flex;align-items:baseline;gap:12px;
+  padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--rule);
+  flex-wrap:wrap;
+}
+.baustein .marke{
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);
+  background:var(--accent-soft);padding:3px 8px;border-radius:4px;white-space:nowrap;
+}
+.baustein h3{margin:0;font-size:19px}
+.baustein > *:last-child{margin-bottom:0}
+.baustein .aufwand{
+  margin-left:auto;font-family:var(--f-mono);font-size:12px;color:var(--ink-3);
+}
+
+/* ---------- Callouts ---------- */
+.hinweis{
+  border-left:3px solid var(--accent);
+  background:var(--surface);
+  padding:16px 20px;border-radius:0 7px 7px 0;margin:22px 0;
+}
+.hinweis.warn{border-left-color:var(--warn-rule);background:var(--warn-bg)}
+.hinweis.stop{border-left-color:var(--stop-rule);background:var(--stop-bg)}
+.hinweis .titel{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;
+}
+.hinweis > *:last-child{margin-bottom:0}
+.hinweis p{max-width:64ch}
+
+.these{
+  font-family:var(--f-display);
+  font-size:clamp(20px,2.9vw,27px);
+  line-height:1.32;letter-spacing:-.012em;
+  border-left:3px solid var(--accent);
+  padding:4px 0 4px 22px;margin:26px 0;max-width:34ch;
+  text-wrap:balance;
+}
+
+/* ---------- Tabellen ---------- */
+.tabwrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:7px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:480px}
+th,td{text-align:left;padding:10px 15px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;background:var(--surface-2);white-space:nowrap;
+}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:none}
+tbody th{font-weight:500;color:var(--ink-2);font-size:13.5px}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.neg{color:var(--a-rot);font-weight:500}
+.pos{color:var(--accent-ink);font-weight:500}
+
+/* ---------- Diagramm Asymmetrie ---------- */
+.bilanz{
+  display:grid;gap:16px;margin:26px 0;
+  grid-template-columns:repeat(auto-fit,minmax(288px,1fr));
+}
+.spalte{
+  background:var(--surface);border:1px solid var(--rule);
+  border-radius:8px;padding:18px 20px 20px;
+}
+.spalte > .kopf{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);
+  padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:10px;
+}
+.spalte.jetzt > .kopf{color:var(--a-rot)}
+.spalte.neu > .kopf{color:var(--accent)}
+.sys{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px dotted var(--rule)}
+.sys:last-of-type{border-bottom:none}
+.sig{
+  flex-shrink:0;width:22px;height:22px;border-radius:5px;
+  display:grid;place-items:center;
+  font-family:var(--f-mono);font-size:13px;font-weight:500;line-height:1;
+  margin-top:1px;
+}
+.sig.minus{background:var(--stop-bg);color:var(--a-rot);border:1px solid var(--stop-rule)}
+.sig.plus{background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent)}
+.sig.weg{background:transparent;color:var(--ink-3);border:1px dashed var(--rule-strong)}
+.sys .txt{min-width:0}
+.sys .name{font-weight:600;font-size:14.5px;line-height:1.35}
+.sys .meta{font-size:12.5px;color:var(--ink-3);font-family:var(--f-mono);margin-top:2px}
+.sys.entfaellt .name{text-decoration:line-through;text-decoration-color:var(--ink-3);color:var(--ink-3)}
+.bilanzfuss{
+  margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);
+  font-size:13.5px;color:var(--ink-2);
+}
+.bilanzfuss b{font-family:var(--f-mono);font-size:15px;color:var(--ink)}
+.spalte.jetzt .bilanzfuss b{color:var(--a-rot)}
+.spalte.neu .bilanzfuss b{color:var(--accent-ink)}
+
+/* ---------- Ampelskala ---------- */
+.ampelskala{display:flex;gap:0;margin:20px 0;border-radius:7px;overflow:hidden;border:1px solid var(--rule);max-width:560px}
+.stufe{flex:1;padding:11px 12px;font-size:13px;border-right:1px solid var(--rule)}
+.stufe:last-child{border-right:none}
+.stufe .lab{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px;opacity:.85}
+.st-weiss{background:var(--surface);color:var(--ink-2)}
+.st-gelb{background:color-mix(in srgb,var(--a-gelb) 20%,var(--surface));color:var(--ink)}
+.st-orange{background:color-mix(in srgb,var(--a-orange) 24%,var(--surface));color:var(--ink)}
+.st-rot{background:color-mix(in srgb,var(--a-rot) 26%,var(--surface));color:var(--ink)}
+
+/* ---------- Beschluss ---------- */
+.beschluss{counter-reset:bp;list-style:none;padding:0;max-width:70ch}
+.beschluss > li{
+  counter-increment:bp;position:relative;padding-left:40px;margin-bottom:15px;
+}
+.beschluss > li::before{
+  content:counter(bp);position:absolute;left:0;top:1px;
+  width:25px;height:25px;border-radius:50%;
+  background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent);
+  display:grid;place-items:center;
+  font-family:var(--f-mono);font-size:12.5px;font-weight:500;
+}
+.beschluss .alt{display:block;font-size:13.5px;color:var(--ink-3);font-style:italic;margin-top:3px}
+
+/* ---------- Quellen ---------- */
+.quelle{padding:13px 0;border-bottom:1px solid var(--rule);max-width:72ch}
+.quelle:last-child{border-bottom:none}
+.quelle .zit{font-size:14.5px}
+.quelle .was{font-size:13.5px;color:var(--ink-2);margin-top:3px}
+
+footer{
+  grid-column:1/-1;margin-top:16px;padding-top:26px;border-top:1px solid var(--rule);
+  font-size:13px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 26px;
+}
+
+.platzhalter{
+  font-family:var(--f-mono);font-size:.88em;
+  background:var(--warn-bg);color:var(--ink-2);
+  padding:1px 6px;border-radius:3px;border:1px dashed var(--warn-rule);
+  white-space:nowrap;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+</style>
+
+</head>
+<body>
+<div style="border-bottom:1px solid var(--rule);background:var(--surface)"><div style="max-width:1180px;margin:0 auto;padding:13px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><a href="index.html" style="font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);text-decoration:none">&larr; Übersicht</a><span style="font-family:var(--f-mono);font-size:12px;color:var(--ink-3)">Konferenzvorlage</span></div></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Verhaltenskonzept &middot; Jahrgang 5/6 &middot; Gesamtschule NRW</div>
+    <h1>Zeit gewinnen statt Zeit verlieren</h1>
+    <p class="dek">Vorlage für die Jahrgangs- und Lehrerkonferenz. Der Vorschlag fügt <b>kein viertes System</b> hinzu — er macht aus dreien zwei und verschiebt das Gewicht von der Sanktion zum Aufbau.</p>
+    <div class="herometa">
+      <span><b>Stand:</b> <span class="platzhalter">Datum</span></span>
+      <span><b>Erarbeitet von:</b> <span class="platzhalter">Namen</span></span>
+      <span><b>Übertragbar auf:</b> Jahrgang 7–10 (Kap. 9)</span>
+    </div>
+  </header>
+
+  <nav aria-label="Inhalt">
+    <div class="navtitel">Inhalt</div>
+    <ol>
+      <li><a href="#k1"><span class="n">01</span> Auf einer Seite</a></li>
+      <li><a href="#k2"><span class="n">02</span> Ausgangslage</a></li>
+      <li><a href="#k3"><span class="n">03</span> Die Analyse</a></li>
+      <li><a href="#k4"><span class="n">04</span> Grundsätze</a></li>
+      <li><a href="#k5"><span class="n">05</span> Was die Forschung hergibt</a></li>
+      <li><a href="#k6"><span class="n">06</span> Die fünf Bausteine</a></li>
+      <li><a href="#k7"><span class="n">07</span> Recht und Datenschutz</a></li>
+      <li><a href="#k8"><span class="n">08</span> Inklusion</a></li>
+      <li><a href="#k9"><span class="n">09</span> Transfer 7–10</a></li>
+      <li><a href="#k10"><span class="n">10</span> Einführung</a></li>
+      <li><a href="#k11"><span class="n">11</span> Evaluation</a></li>
+      <li><a href="#k12"><span class="n">12</span> Risiken</a></li>
+      <li><a href="#k13"><span class="n">13</span> Beschlussvorschlag</a></li>
+      <li><a href="#k14"><span class="n">14</span> Quellen</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 01 -->
+    <section id="k1">
+      <div class="h2num">Kapitel 01</div>
+      <h2>Das Wichtigste auf einer Seite</h2>
+      <div class="strahl"></div>
+
+      <p class="lead">Wir haben drei Instrumente zur Verhaltenssteuerung. Zwei davon erfassen einzelne Kinder namentlich und öffentlich, und beide tun das ausschließlich negativ. Nur eines arbeitet positiv — und das erfasst nicht das Kind, sondern die Klasse.</p>
+
+      <p>Das Problem ist also nicht, dass zu wenig passiert. Das Problem ist die Schieflage. Für ein Kind der fünften Klasse ist sichtbar, wann es scheitert. Wann es gelingt, ist es nicht.</p>
+
+      <div class="karten">
+        <div class="karte">
+          <div class="kicker">Aufwand im Unterricht</div>
+          <div class="gross">1</div>
+          <p>Handgriff pro Stunde. Ein Strich auf einem A4-Blatt, wortlos.</p>
+        </div>
+        <div class="karte">
+          <div class="kicker">Neue Systeme</div>
+          <div class="gross">&minus;1</div>
+          <p>Der Zeitfresser-Strahl entfällt. Es kommt nichts hinzu.</p>
+        </div>
+        <div class="karte">
+          <div class="kicker">Neue Währung</div>
+          <div class="gross">keine</div>
+          <p>Der Zeitsparer bleibt. Nur die Regel zum Füllen ist neu.</p>
+        </div>
+        <div class="karte">
+          <div class="kicker">Budget</div>
+          <div class="gross">0 €</div>
+          <p>Keine Anschaffung, keine Software, keine Lizenz.</p>
+        </div>
+      </div>
+
+      <h3>Was wir vorschlagen</h3>
+      <ol>
+        <li>Einführung des <b>KlasseKinderSpiels</b> — der deutschen Adaption des <i>Good Behavior Game</i>, ein extern qualitätsgeprüftes Präventionsprogramm.</li>
+        <li>Der <b>Zeitsparer-Strahl bleibt unsere Währung.</b> Keine neuen Punkte, Token oder Sticker. Das Spiel liefert nur eine klarere Regel, wie er sich füllt.</li>
+        <li>Der <b>Zeitfresser-Strahl entfällt.</b> Sein Zielverhalten wandert vollständig ins Spiel.</li>
+        <li>Die <b>Ampel bleibt</b> als Eskalationsleiter und bekommt zwei kostenlose Korrekturen. Am Auszeitraum ändert sich nichts.</li>
+        <li>Für einzelne Kinder: eine <b>befristete Verhaltensvereinbarung</b> mit Tagesrückmeldung. Nicht öffentlich, nicht für alle, nicht auf Dauer.</li>
+      </ol>
+
+      <div class="hinweis">
+        <div class="titel">Was wir realistisch erwarten</div>
+        <p>Kleine bis mittlere, aber verlässliche Effekte auf Unterrichtsstörungen und nutzbare Arbeitszeit. Wir versprechen bewusst keine großen Effekte — die Begründung steht in Kapitel 5. Was wir zusätzlich erwarten: weniger Kinder, die den Schultag mit dem Gefühl verlassen, nur aufgefallen zu sein.</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="k2">
+      <div class="h2num">Kapitel 02</div>
+      <h2>Was wir bereits haben</h2>
+      <div class="strahl"></div>
+
+      <div class="tabwrap">
+        <table>
+          <thead>
+            <tr><th>Instrument</th><th>Ebene</th><th>Richtung</th><th>Sichtbarkeit</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Ampel + Auszeitraum</th><td>einzelnes Kind</td><td class="neg">negativ</td><td>öffentlich — Namensliste, Magnete</td></tr>
+            <tr><th>Zeitfresser-Strahl</th><td>einzelnes Kind</td><td class="neg">negativ</td><td>öffentlich — mit Namen</td></tr>
+            <tr><th>Zeitsparer-Strahl</th><td>Klasse</td><td class="pos">positiv</td><td>öffentlich</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Die Ampel im Detail</h3>
+      <p>Alle Namen stehen auf einer Liste, jedes Kind hat einen Magneten. Erste Ermahnung: Grün. Zweite: Gelb. Dritte: Rot. Bei Rot folgt der Auszeitzettel am Extratisch, bei weiterem Verstoß der Auszeitraum mit Reflexionsgespräch.</p>
+      <p>Reset-Rhythmus: <span class="platzhalter">pro Stunde / pro Tag</span> &nbsp;·&nbsp; Elterninformation ab: <span class="platzhalter">ANPASSEN</span></p>
+
+      <h3>Der Zeitsparer funktioniert bereits gut</h3>
+      <p>Er ist in der Sache genau das, was die Fachliteratur eine <i>Token Economy mit Gruppenkontingenz</i> nennt: ein Sammelsystem mit attraktiven Verstärkern. Er ist eingeführt, die Kinder kennen ihn, die Belohnungen sind erprobt. Darauf baut dieses Konzept auf, statt daneben etwas Neues zu stellen.</p>
+    </section>
+
+    <!-- 03 -->
+    <section id="k3">
+      <div class="h2num">Kapitel 03</div>
+      <h2>Die Analyse</h2>
+      <div class="strahl"></div>
+
+      <h3>Befund 1 — Die Bilanz steht 2:1 gegen das einzelne Kind</h3>
+
+      <div class="bilanz">
+        <div class="spalte jetzt">
+          <div class="kopf"><span>Heute</span><span>3 Systeme</span></div>
+          <div class="sys"><div class="sig minus">–</div><div class="txt"><div class="name">Ampel</div><div class="meta">einzeln · öffentlich</div></div></div>
+          <div class="sys"><div class="sig minus">–</div><div class="txt"><div class="name">Zeitfresser-Strahl</div><div class="meta">einzeln · öffentlich</div></div></div>
+          <div class="sys"><div class="sig plus">+</div><div class="txt"><div class="name">Zeitsparer-Strahl</div><div class="meta">Klasse · kollektiv</div></div></div>
+          <div class="bilanzfuss">Auf das einzelne Kind bezogen: <b>2 negativ, 0 positiv.</b></div>
+        </div>
+
+        <div class="spalte neu">
+          <div class="kopf"><span>Vorschlag</span><span>2 Systeme</span></div>
+          <div class="sys"><div class="sig minus">–</div><div class="txt"><div class="name">Ampel</div><div class="meta">einzeln · verdeckt · Grenzen</div></div></div>
+          <div class="sys entfaellt"><div class="sig weg">×</div><div class="txt"><div class="name">Zeitfresser-Strahl</div><div class="meta">geht in die Spielregeln über</div></div></div>
+          <div class="sys"><div class="sig plus">+</div><div class="txt"><div class="name">KlasseKinderSpiel → Zeitsparer</div><div class="meta">Team · anonym · Aufbau</div></div></div>
+          <div class="sys"><div class="sig plus">+</div><div class="txt"><div class="name">Vereinbarung mit Tageskarte</div><div class="meta">einzeln · privat · nur bei Bedarf</div></div></div>
+          <div class="bilanzfuss">Auf das einzelne Kind bezogen: <b>1 negativ, 1 positiv.</b></div>
+        </div>
+      </div>
+
+      <p>Für ein Kind, das sich schwertut, heißt das heute konkret: Sein Scheitern hat einen eigenen Magneten und einen eigenen Punkt auf einem Zahlenstrahl, beides für alle sichtbar. Sein Gelingen hat nichts davon — es verschwindet in einem Klassenergebnis, zu dem 28 andere auch beigetragen haben.</p>
+
+      <h3>Befund 2 — Wir sanktionieren dasselbe Verhalten doppelt</h3>
+      <p>Ampel und Zeitfresser-Strahl überschneiden sich. Ein Kind, das trödelt, kann dafür einen Zeitfresser bekommen <em>und</em> eine Ermahnung, also einen Magnetzug. Ein Vorgang, zwei Systeme, zwei Einträge.</p>
+      <p>Für uns ist das unübersichtlich, für die Kinder schwer nachvollziehbar, und pädagogisch nicht zu rechtfertigen. Wer ein weiteres System hinzufügt, macht dieses Problem größer.</p>
+
+      <div class="these">Wir konsolidieren, statt zu ergänzen. Wir brauchen kein viertes System — wir brauchen eins weniger.</div>
+
+      <h3>Befund 3 — Die Farblogik der Ampel ist verdreht</h3>
+      <p>Bei uns bedeutet Grün „erste Ermahnung". Überall sonst bedeutet Grün „alles in Ordnung". Ein Kind, dessen Magnet auf Grün steht, ist bereits ermahnt worden — sieht aber aus wie ein Vorbild. Für Fünftklässler ist das schwer zu durchschauen, für Vertretungs- und neue Lehrkräfte ebenfalls.</p>
+
+      <div class="ampelskala">
+        <div class="stufe st-weiss"><span class="lab">Start</span>alles in Ordnung</div>
+        <div class="stufe st-gelb"><span class="lab">1. Ermahnung</span>Gelb</div>
+        <div class="stufe st-orange"><span class="lab">2. Ermahnung</span>Orange</div>
+        <div class="stufe st-rot"><span class="lab">3. Ermahnung</span>Auszeitzettel</div>
+      </div>
+      <p>Behebbar ohne jeden Aufwand: Startfeld neutral, dann Gelb → Orange → Rot. Wer nichts getan hat, steht auf Weiß.</p>
+    </section>
+
+    <!-- 04 -->
+    <section id="k4">
+      <div class="h2num">Kapitel 04</div>
+      <h2>Grundsätze</h2>
+      <div class="strahl"></div>
+      <p class="lead">Diese sieben Punkte gelten für alle Bausteine. Sie sind der Maßstab, an dem wir uns nach einem halben Jahr messen lassen.</p>
+
+      <ol>
+        <li><b>Aufbauen kommt vor Begrenzen.</b> Grenzen brauchen wir weiterhin — die Ampel bleibt. Aber der Schwerpunkt verschiebt sich darauf zu zeigen, was gelingt.</li>
+        <li><b>Belohnt wird Verhalten, niemals Leistung.</b> Keine Punkte für gute Noten, richtige Ergebnisse oder schnelles Arbeiten.</li>
+        <li><b>Erlebnisse und Rechte vor Gegenständen.</b> Materielles ist überall optional — das System funktioniert vollständig ohne Budget.</li>
+        <li><b>Man kann gewinnen, aber nicht ausgeschlossen werden.</b> Kein Kind wird von einer Klassenbelohnung ausgenommen.</li>
+        <li><b>Keine Verhaltensbewertung mit Namen an der Wand.</b> Weder dauerhaft noch für Fachfremde einsehbar.</li>
+        <li><b>Das Ausschleichen ist von Anfang an eingebaut.</b> Ziel ist nicht ein System, das die Klasse für immer braucht, sondern eines, das sie irgendwann nicht mehr braucht.</li>
+        <li><b>Strikte Trennung von Zeugnis und Bewertung.</b> Nicht verhandelbar.</li>
+      </ol>
+    </section>
+
+    <!-- 05 -->
+    <section id="k5">
+      <div class="h2num">Kapitel 05</div>
+      <h2>Was die Forschung hergibt — und was nicht</h2>
+      <div class="strahl"></div>
+      <p class="lead">Bewusst nüchtern. Es ist klüger, in der Konferenz realistische Zahlen zu nennen, als große Effekte zu versprechen, an denen wir uns in einem halben Jahr messen lassen müssten.</p>
+
+      <h3>Die ehrliche Zahl</h3>
+      <p>In Ratgebern und KI-Rechercheergebnissen kursieren sehr große Effektstärken — Werte um d = 1,2 oder ES = 0,82. Diese Zahlen sind nicht falsch, aber sie stammen fast alle aus <b>Einzelfallforschung</b>. Deren Kennwerte sind mit Effektstärken aus Gruppenvergleichsstudien systematisch nicht vergleichbar und fallen regelhaft deutlich höher aus.</p>
+
+      <div class="tabwrap">
+        <table>
+          <thead><tr><th>Quelle</th><th>Studientyp</th><th>Effekt</th><th>Vergleichbar mit</th></tr></thead>
+          <tbody>
+            <tr><th>Korpershoek et al. 2025</th><td>76 kontrollierte Gruppenstudien</td><td class="num">g = .23</td><td>Gruppenstudien</td></tr>
+            <tr><th>Soares et al. 2016</th><td>28 Einzelfallstudien</td><td class="num">0,82</td><td>nur untereinander</td></tr>
+            <tr><th>Kim et al. 2021</th><td>24 Einzelfallstudien</td><td class="num">IRD .83</td><td>nur untereinander</td></tr>
+            <tr><th>„d = 1,2"</th><td colspan="3">keiner belastbaren Primärquelle zuzuordnen — nicht verwenden</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="hinweis">
+        <div class="titel">Unsere Aussage in der Konferenz</div>
+        <p>Wir erwarten einen kleinen bis mittleren Effekt bei sehr geringen Kosten. Das ist ein gutes Geschäft. Es ist aber kein Wundermittel, und wir werden auch danach Kinder im Auszeitraum haben.</p>
+      </div>
+
+      <h3>Warum das KlasseKinderSpiel und nicht etwas anderes</h3>
+      <p>Das <i>Good Behavior Game</i> wird seit 1969 erforscht, einschließlich randomisierter kontrollierter Studien mit Langzeit-Nachbeobachtung. Vier praktische Gründe geben den Ausschlag:</p>
+      <ul>
+        <li>Es existiert eine <b>deutschsprachige Fertigadaption</b> (Hillenbrand &amp; Pütz, Körber-Stiftung). Wir müssen das Kernstück nicht selbst erfinden.</li>
+        <li>Es ist auf der <b>Grünen Liste Prävention</b> gelistet — extern auf Programmqualität geprüft.</li>
+        <li>Es arbeitet auf <b>Gruppenebene</b> und passt damit zu einer Klasse mit zehn und mehr Fachlehrkräften.</li>
+        <li>Es kann ein <b>bestehendes Instrument ersetzen</b> statt eines hinzuzufügen — der einzige Vorschlag, auf den das zutrifft.</li>
+      </ul>
+
+      <h3>Der Einwand „Belohnungen verderben die Motivation"</h3>
+      <p>Dieser Einwand kommt in der Konferenz mit Sicherheit, und er ist berechtigt. Die Metaanalyse von Deci, Koestner und Ryan (1999) über 128 Experimente zeigt: Erwartete materielle Belohnungen können intrinsische Motivation untergraben — <b>bei Kindern stärker als bei Erwachsenen</b>.</p>
+      <p>Der Effekt betrifft allerdings vor allem die Motivation <em>für die belohnte Tätigkeit selbst</em>. Wer fürs Lesen bezahlt, riskiert, dass Lesen zur bezahlten Arbeit wird. Wer belohnt, dass eine Klasse leise anfängt zu arbeiten, riskiert das nicht in gleicher Weise — leise anfangen war vorher keine Tätigkeit, die aus sich heraus Freude gemacht hat.</p>
+      <p>Daraus ziehen wir vier Konsequenzen, die alle im Konzept verankert sind: Verstärkung nur auf Verhalten; Erlebnisse vor Gegenständen; verhaltensspezifisches Lob als Hauptträger; Ausschleichen von Anfang an. Damit ist der Einwand nicht weggewischt, sondern verarbeitet — das ist die bessere Antwort in einer Konferenz.</p>
+
+      <h3>Der billigste Hebel</h3>
+      <p>Verhaltensspezifisches Lob im Verhältnis <b>4:1</b> zu Korrekturen ist eine der am besten belegten und günstigsten Maßnahmen des Classroom Managements. Entscheidend ist die Qualität: „Gut gemacht" wirkt kaum. „Ihr habt in unter einer Minute das Material draußen gehabt" wirkt.</p>
+      <p>Für Jahrgang 7–10 besonders nützlich: Ältere Schülerinnen und Schüler bevorzugen <b>schriftliches</b> Lob. Eine kurze Notiz nach Hause wirkt dort besser als öffentliches Loben, das in dem Alter schnell peinlich ist.</p>
+
+      <h3>Ein offenes Wort zum bestehenden Ampel- und Auszeitkonzept</h3>
+      <p>Das Trainingsraumkonzept nach Bründel und Simon ist weit verbreitet, seine empirische Grundlage ist jedoch schwach: Die Ursprungsstudie von 2003 arbeitet ohne Vorher-Nachher-Messung, ohne Kontrollgruppe und ohne geprüfte Instrumente. In der Fachliteratur wird es entsprechend kontrovers diskutiert.</p>
+
+      <div class="hinweis warn">
+        <div class="titel">Wichtig für die Konferenz</div>
+        <p>Wir schlagen ausdrücklich <b>nicht</b> vor, den Auszeitraum abzuschaffen. Er wird gebraucht und ist nicht Gegenstand dieser Vorlage. Der Punkt dient allein als Begründung dafür, warum eine präventive Ebene hinzukommen muss: Ein Instrument, das erst greift, wenn bereits etwas schiefgelaufen ist, kann nicht die einzige Antwort auf Unterrichtsstörungen sein. Es braucht etwas davor.</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="k6">
+      <div class="h2num">Kapitel 06</div>
+      <h2>Die fünf Bausteine</h2>
+      <div class="strahl"></div>
+
+      <div class="baustein">
+        <div class="kopf"><span class="marke">Baustein 0</span><h3>Verhaltensspezifisches Lob, 4:1</h3><span class="aufwand">Aufwand: keiner</span></div>
+        <p>Das Jahrgangsteam vereinbart, auf jede Korrektur etwa vier verhaltensspezifische Rückmeldungen kommen zu lassen. Verhaltensspezifisch heißt: benennen, was konkret gelungen ist.</p>
+        <p>Steht bewusst an erster Stelle. Es kostet nichts, braucht keinen Beschluss und kein Material — und ist der Hebel mit dem besten Verhältnis von Aufwand zu Wirkung. Wenn alles andere scheitert, ist das hier immer noch da.</p>
+      </div>
+
+      <div class="baustein">
+        <div class="kopf"><span class="marke">Baustein 1 · Kern</span><h3>Das KlasseKinderSpiel füllt den Zeitsparer</h3><span class="aufwand">Aufwand: 1 Handgriff</span></div>
+        <p>Wir behalten den Zeitsparer als Währung und ersetzen nur die Regel, nach der er gefüllt wird. Bisher füllt er sich nach Ermessen der Lehrkraft — für Kinder schwer vorhersehbar und über zehn Fachlehrkräfte hinweg kaum einheitlich. Künftig nach einer Regel, die alle kennen.</p>
+        <ol>
+          <li><b>Regeln.</b> Die Klasse erarbeitet drei bis vier positiv formulierte Regeln. „Wir arbeiten an unserer Aufgabe" statt „Wir stören nicht". Als Plakat im Raum — ohne Namen.</li>
+          <li><b>Teams.</b> Tischgruppen, von der Klassenleitung eingeteilt.</li>
+          <li><b>Ankündigung.</b> „Wir spielen jetzt zwanzig Minuten das KlasseKinderSpiel."</li>
+          <li><b>Fouls.</b> Bei Regelverstoß wortlos ein Strich beim Team. Kein Vortrag, keine Diskussion, keine Namensnennung.</li>
+          <li><b>Auswertung.</b> Jedes Team unter dem Foul-Limit von vier hat gewonnen.</li>
+          <li><b>Gutschrift.</b> Pro gewinnendes Team eine Minute auf den Zeitsparer.</li>
+        </ol>
+
+        <div class="hinweis">
+          <div class="titel">Der entscheidende Konstruktionspunkt</div>
+          <p>Die Teams spielen <b>gegen ein Limit, nicht gegeneinander.</b> Es können alle gleichzeitig gewinnen. Dadurch gibt es keine Verlierergruppe, keinen Wettbewerb zwischen Kindern und — besonders wichtig — keinen Gruppendruck gegen ein einzelnes Kind, das sich schwertut.</p>
+        </div>
+
+        <p><b>Startdosierung:</b> zwei- bis dreimal pro Woche, zehn bis zwanzig Minuten, nur in wenigen Fächern, deren Lehrkräfte ausdrücklich mitmachen wollen. Ausweitung erst nach vier bis sechs Wochen. Wer sofort flächendeckend startet, verbrennt das Instrument.</p>
+      </div>
+
+      <div class="baustein">
+        <div class="kopf"><span class="marke">Baustein 2 · Konsolidierung</span><h3>Zeitfresser-Strahl entfällt, Ampel wird geschärft</h3></div>
+
+        <h4>Der Zeitfresser-Strahl entfällt</h4>
+        <p>Sein Zielverhalten — zu lange brauchen, trödeln, den Anfang verschleppen — wird zu einer der Spielregeln. Für die Kinder heißt das: Dasselbe Verhalten wird weiter beachtet, aber es steht kein Name mehr an der Wand, es gibt keine Doppelsanktionierung, und jede neue Spielrunde ist ein echter Neuanfang statt eines Kontos, das sich über Wochen Richtung zehn füllt.</p>
+        <p><b>Begründung für die Konferenz:</b> Ein reines Negativkonto ohne Rückgewinnungsmöglichkeit ist der methodisch schwächste Teil unseres bisherigen Systems. Wer bei acht von zehn steht, hat keinen Anreiz mehr, sich anzustrengen — die Konsequenz kommt ohnehin.</p>
+
+        <div class="hinweis warn">
+          <div class="titel">Rückfallposition</div>
+          <p>Falls die Konferenz die Abschaffung nicht mitträgt: Der Strahl bleibt, wird aber dreifach entschärft — nicht mehr offen aushängend, wöchentlicher Reset oder Rückgewinnungsregel („zwei Tage ohne = einer zurück"), und der erste Zeitfresser löst ein Gespräch aus statt eines Eintrags. Deutlich schwächer, behebt aber die beiden gravierendsten Punkte. Nur wählen, wenn sonst das gesamte Konzept fällt.</p>
+        </div>
+
+        <h4>Die Ampel bleibt — mit zwei Korrekturen</h4>
+        <p>Sie behält ihre Funktion vollständig. <b>Am Auszeitraum ändert sich nichts.</b></p>
+        <p><b>Minimalvariante</b> (beide Korrekturen kostenlos): neutrales Startfeld statt Grün-als-erste-Ermahnung; Magnetliste nicht mehr offen einsehbar.</p>
+        <p><b>Empfohlene Variante</b> zusätzlich: Reset zu jeder Stunde statt pro Tag — jede Stunde beginnt für jedes Kind bei Weiß. Das ist der wirksamste Einzelpunkt an der Ampel und zugleich der billigste. Und: Auszeitzettel vom Sanktions- zum Hilfsinstrument umformulieren („Was brauchst du, um wieder mitarbeiten zu können?").</p>
+
+        <h4>Abgrenzung: Wann Ampel, wann Spiel?</h4>
+        <div class="tabwrap">
+          <table>
+            <thead><tr><th></th><th>Ampel</th><th>KlasseKinderSpiel</th></tr></thead>
+            <tbody>
+              <tr><th>Zweck</th><td>Grenzen ziehen</td><td>Verhalten aufbauen</td></tr>
+              <tr><th>Ebene</th><td>einzelnes Kind</td><td>Team</td></tr>
+              <tr><th>Sichtbarkeit</th><td>nur intern, verdeckt</td><td>Teamstriche, keine Namen</td></tr>
+              <tr><th>Reaktion</th><td>Eskalationsstufe</td><td>Strich, wortlos</td></tr>
+              <tr><th>Reset</th><td>jede Stunde</td><td>jede Spielrunde</td></tr>
+              <tr><th>Gilt</th><td>immer</td><td>nur in angekündigten Spielphasen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="these" style="margin-bottom:0">Läuft eine Spielphase, ist ein Regelverstoß zuerst ein Foul. Die Ampel ist die Notbremse, nicht die erste Reaktion.</div>
+      </div>
+
+      <div class="baustein">
+        <div class="kopf"><span class="marke">Baustein 3</span><h3>Vereinbarung mit Tagesrückmeldung</h3><span class="aufwand">Aufwand: 10 Sek./Stunde</span></div>
+        <p>Für einzelne Kinder, bei denen die Klassenebene nicht ausreicht. Nicht für alle, nicht auf Zuruf, sondern auf <b>Beschluss des Klassenteams</b> und <b>in Absprache mit den Eltern</b>. Größenordnung: ein bis drei Kinder pro Klasse.</p>
+        <ul>
+          <li>Zwei bis drei positiv formulierte, individuelle Ziele, gemeinsam mit dem Kind festgelegt.</li>
+          <li>Das Kind trägt eine eigene Karte. Jede Fachlehrkraft setzt am Stundenende ein Häkchen pro Ziel.</li>
+          <li>Am Tagesende zählt das Kind selbst aus. Tagesziel erreicht → vereinbarte Verstärkung.</li>
+          <li>Das Tagesziel beginnt erreichbar: Wer bisher bei 40 % liegt, startet nicht bei 90 %.</li>
+        </ul>
+        <p><b>Drei Punkte, die nicht verhandelbar sind:</b> Die Karte gehört dem Kind und wird nicht ausgehängt — damit sind Datenschutz und Stigmatisierung in einem Zug gelöst. Befristung auf sechs Wochen, danach Überprüfung. Ausschleichen ist Teil der Vereinbarung von Anfang an.</p>
+      </div>
+
+      <div class="baustein">
+        <div class="kopf"><span class="marke">Baustein 4</span><h3>Das Verstärker-Menü</h3></div>
+        <p>Belohnungen wirken nur, wenn die Kinder sie tatsächlich wollen. Deshalb wird das Menü <b>mit der Klasse ausgehandelt</b>. Wir setzen den Rahmen, die Klasse füllt ihn.</p>
+        <div class="tabwrap">
+          <table>
+            <thead><tr><th>Rang</th><th>Kategorie</th><th>Beispiele</th><th>Kosten</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><th>Zeit</th><td>Spielzeit, freie Arbeitszeit, Vorlesezeit</td><td>keine</td></tr>
+              <tr><td class="num">2</td><th>Privilegien &amp; Joker</th><td>Sitzplatzwahl, Musik in Stillarbeit, HA-Joker</td><td>keine</td></tr>
+              <tr><td class="num">3</td><th>Gemeinsame Aktionen</th><td>Frühstück, Spielestunde, Ausflug</td><td>Zeitfenster</td></tr>
+              <tr><td class="num">4</td><th>Materielles <i>(optional)</i></th><td>nur wo eine Klassenkasse besteht</td><td>Budget</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>Preisliste</b> sichtbar aushängen — sonst entstehen Aushandlungen in jeder Stunde. <b>Nachverhandlung nach acht Wochen:</b> Verstärker nutzen sich ab. Was im September zieht, zieht im November nicht mehr.</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="k7">
+      <div class="h2num">Kapitel 07</div>
+      <h2>Recht und Datenschutz</h2>
+      <div class="strahl"></div>
+      <p class="lead">Genau die Punkte, an denen ein Verhaltenskonzept später angreifbar wird.</p>
+
+      <div class="hinweis stop">
+        <div class="titel">Hinweis</div>
+        <p>Das Folgende ist eine sorgfältig recherchierte Einschätzung, <b>keine Rechtsauskunft</b>. Wir schlagen vor, es vor der Einführung der schulischen Datenschutzbeauftragten zur Prüfung vorzulegen.</p>
+      </div>
+
+      <h3>1. Digitale Erfassung: nur ohne Namen</h3>
+      <p>Daten auf Klassenebene — Zeitsparer-Stand, Spielergebnis, Teamstriche — sind keine personenbezogenen Daten und dürfen ohne Weiteres digital geführt werden.</p>
+      <p>Für <b>individuelle Verhaltensdaten gilt das nicht.</b> Verhaltensdaten sind in Anlage 3 der VO-DV I nicht als zur Verarbeitung zugelassene Daten gelistet. Daraus folgt: keine Verarbeitung mit Personenbezug auf privaten Geräten und nicht online — auch nicht im LOGINEO-Datensafe. Individuelle Unterlagen bleiben analog und verschlossen in der Schule.</p>
+      <p>Das ist keine Einschränkung, sondern eine saubere Arbeitsteilung: Was ausgewertet werden soll, ist ohnehin anonym. Was personenbezogen ist, muss ohnehin nicht ausgewertet werden.</p>
+
+      <h3>2. LOGINEO NRW</h3>
+      <p>Kostenfrei für NRW-Schulen, Einführung braucht aber einen Beschluss der Lehrerkonferenz (bei Nutzung durch Schülerinnen und Schüler zusätzlich der Schulkonferenz). <b>Dieses Konzept startet bewusst ohne jede Abhängigkeit davon.</b> Stand an unserer Schule: <span class="platzhalter">ANPASSEN</span></p>
+
+      <h3>3. Offen aushängende Verhaltensbewertungen mit Namen</h3>
+      <p>Angreifbar, sobald der Raum von anderen Personen genutzt wird — bei Raumwechsel, Vertretungen und Elternabenden praktisch immer. Betroffen sind Zeitfresser-Strahl und Ampel-Magnetliste. Baustein 2 löst beides.</p>
+
+      <h3>4. Kein Ausschluss einzelner Kinder von Klassenbelohnungen</h3>
+      <p>Ein Kind von einer erarbeiteten Klassenbelohnung auszunehmen, wäre der Sache nach eine Ordnungsmaßnahme — ohne das in <b>§ 53 SchulG NRW</b> vorgesehene Verfahren und ohne Verhältnismäßigkeitsprüfung. Konstruktionsprinzip deshalb: Man kann gewinnen, aber nicht ausgeschlossen werden. Genau deshalb spielen die Teams gegen ein Limit.</p>
+
+      <h3>5. Strikte Entkopplung von Bewertung</h3>
+      <p>Nichts fließt in Noten, Zeugnisbemerkungen zum Arbeits- und Sozialverhalten oder Klassenkonferenzentscheidungen ein. Sonst wird aus einem pädagogischen Instrument ein beurteilungsrelevantes — mit allen rechtlichen Folgen und dem sicheren Ergebnis, dass die Kinder anfangen, das System zu bespielen statt mitzuspielen.</p>
+    </section>
+
+    <!-- 08 -->
+    <section id="k8">
+      <div class="h2num">Kapitel 08</div>
+      <h2>Inklusion und Nachteilsausgleich</h2>
+      <div class="strahl"></div>
+      <p class="lead">Ein Belohnungssystem, das nur die Kinder erreicht, die ohnehin funktionieren, ist sein Papier nicht wert.</p>
+
+      <h3>Kein Kind kann die Gruppe um den Gewinn bringen</h3>
+      <p>Foul-Limit und Teamgröße sind so gesetzt, dass ein einzelnes Kind mit erhöhtem Unterstützungsbedarf das Teamergebnis nicht allein kippt. Zeichnet sich in einer Klasse ab, dass es doch passiert, wird das Limit angehoben — nicht das Kind ausgetauscht.</p>
+
+      <h3>Individuelle Maßstäbe sind ausdrücklich erwünscht</h3>
+      <p>Für Kinder mit AO-SF, mit ADHS-Diagnose oder in vergleichbarer Lage gilt das Kriterium der <b>Selbstverbesserung</b> statt eines Absolutmaßstabs. Gemessen wird an der eigenen Vorwoche, nicht am Klassenschnitt. Fairness heißt hier nicht Gleichbehandlung.</p>
+
+      <h3>Baustein 3 ist genau dafür da</h3>
+      <p>Wer die Klassenebene nicht schafft, bekommt eine eigene, erreichbare Zielhöhe — nicht mehr Druck auf dasselbe Ziel. Verantwortlich ist das Klassenteam gemeinsam mit der Sonderpädagogin oder dem Sonderpädagogen der Klasse. <span class="platzhalter">Zuständigkeit ANPASSEN</span></p>
+    </section>
+
+    <!-- 09 -->
+    <section id="k9">
+      <div class="h2num">Kapitel 09</div>
+      <h2>Übertragung auf Jahrgang 7–10</h2>
+      <div class="strahl"></div>
+      <p class="lead">Die Mechanik trägt bis Klasse 10. Was sich ändern muss, ist die Verpackung und der Grad an Mitbestimmung.</p>
+
+      <div class="tabwrap">
+        <table>
+          <thead><tr><th></th><th>Jahrgang 5/6</th><th>Jahrgang 7–10</th></tr></thead>
+          <tbody>
+            <tr><th>Name</th><td>KlasseKinderSpiel</td><td>Team-Challenge / Zeitkonto</td></tr>
+            <tr><th>Optik</th><td>Plakat, Farben, Symbole</td><td>nüchtern, kein Smiley, kein Sticker</td></tr>
+            <tr><th>Regeln</th><td>Klasse erarbeitet mit</td><td>Klasse <b>verhandelt mit</b>, inkl. Foul-Limit</td></tr>
+            <tr><th>Lob</th><td>mündlich, direkt</td><td><b>schriftlich</b> — Notiz, Karte nach Hause</td></tr>
+            <tr><th>Rückmeldung</th><td>Lehrkraft bewertet</td><td><b>Selbsteinschätzung</b>, Lehrkraft bestätigt</td></tr>
+            <tr><th>Spielphasen</th><td>kurz, häufig</td><td>länger, seltener</td></tr>
+            <tr><th>Verstärker</th><td>Spielzeit, Aktionen</td><td>echte Rechte: Sitzordnung, Themenwahl, Termine</td></tr>
+            <tr><th>Ziel</th><td>Verhalten aufbauen</td><td>Selbstregulation, dann Ausschleichen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="these">Der wichtigste Unterschied ist nicht die Optik, sondern die Autonomie.</div>
+      <p>Was in Klasse 5 als Spiel funktioniert, funktioniert in Klasse 9 nur noch, wenn die Klasse die Regeln mit ausgehandelt hat. Wer ein 5er-System unverändert in eine 9 trägt, erntet zu Recht Spott.</p>
+      <p><b>Zeitplan:</b> erst Jahrgang 5/6 ein volles Halbjahr erproben und auswerten, dann auf Grundlage der Evaluationsdaten über die Ausweitung entscheiden. Nicht parallel starten.</p>
+    </section>
+
+    <!-- 10 -->
+    <section id="k10">
+      <div class="h2num">Kapitel 10</div>
+      <h2>Einführung</h2>
+      <div class="strahl"></div>
+
+      <div class="tabwrap">
+        <table>
+          <thead><tr><th>Zeitpunkt</th><th>Was passiert</th></tr></thead>
+          <tbody>
+            <tr><th>Vor dem Start</th><td>Konferenzbeschluss · Baseline-Daten erheben · DSB-Prüfung · Material drucken</td></tr>
+            <tr><th>Woche 0</th><td>20-Minuten-Einführung im Jahrgangsteam · Elternbrief</td></tr>
+            <tr><th>Woche 1</th><td>Zwei Einführungsstunden je Klasse: Regeln erarbeiten, Verstärker-Menü aushandeln, Proberunde</td></tr>
+            <tr><th>Woche 2–3</th><td>Spiel läuft in wenigen Fächern, kurze Phasen · Zeitfresser-Strahl wird abgebaut</td></tr>
+            <tr><th>Woche 4</th><td>Erste Zwischenauswertung · Foul-Limit und Preise nachjustieren</td></tr>
+            <tr><th>Woche 5–6</th><td>Ausweitung auf weitere Fächer · erste Baustein-3-Vereinbarungen</td></tr>
+            <tr><th>Nach 6 Wochen</th><td>Evaluation, Beschluss über Fortführung</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="hinweis">
+        <div class="titel">Die kritischste Regel der ganzen Einführung</div>
+        <p>Klein anfangen. Zwei bis drei Fächer, kurze Phasen, freiwillige Lehrkräfte. Ein flächendeckender Start am ersten Tag ist die verlässlichste Methode, das Instrument zu verbrennen.</p>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="k11">
+      <div class="h2num">Kapitel 11</div>
+      <h2>Evaluation</h2>
+      <div class="strahl"></div>
+      <p class="lead">Ohne Auswertung ist das kein Konzept, sondern eine Idee. Und ohne Baseline <em>vor</em> dem Start ist auch die Auswertung wertlos.</p>
+
+      <h3>Vor dem Start erheben</h3>
+      <p>Alles ohne Namen, alles bereits vorhanden: Auszeitraum-Verweise pro Woche im Jahrgang · vergebene Zeitfresser pro Klasse und Woche · Zeitsparer-Minuten pro Klasse und Woche · Ampel-Stufe Rot pro Klasse und Woche. Wiederholung nach sechs Wochen und nach einem Halbjahr. Kostet eine halbe Stunde.</p>
+
+      <h3>Zwei Kurzbefragungen</h3>
+      <ul>
+        <li><b>Schülerinnen und Schüler</b> (anonym, 4–6 Items): Fühle ich mich fair behandelt? Weiß ich, was von mir erwartet wird? Wird gesehen, wenn ich mich anstrenge?</li>
+        <li><b>Kollegium</b> (5 Fragen): Aufwand pro Stunde? Praktikabel? Wirkung erlebt? Was nervt? Weitermachen?</li>
+      </ul>
+
+      <h3>Nachsteuerungskriterien — jetzt festgelegt, nicht hinterher</h3>
+      <div class="tabwrap">
+        <table>
+          <thead><tr><th>Beobachtung</th><th>Reaktion</th></tr></thead>
+          <tbody>
+            <tr><th>Weniger als die Hälfte der Fachlehrkräfte macht mit</th><td>Aufwand weiter reduzieren — nicht Druck erhöhen</td></tr>
+            <tr><th>Teams gewinnen fast immer</th><td>Foul-Limit senken</td></tr>
+            <tr><th>Teams verlieren häufig</th><td>Foul-Limit anheben, Spielphasen kürzen</td></tr>
+            <tr><th>Zeitsparer-Minuten werden nicht eingelöst</th><td>Verstärker-Menü neu aushandeln</td></tr>
+            <tr><th>Auszeitraum-Zahlen unverändert nach einem Halbjahr</th><td>Konzept grundsätzlich überprüfen</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section id="k12">
+      <div class="h2num">Kapitel 12</div>
+      <h2>Risiken — und was wir dagegen tun</h2>
+      <div class="strahl"></div>
+
+      <div class="tabwrap">
+        <table>
+          <thead><tr><th>Risiko</th><th>Gegenmaßnahme</th></tr></thead>
+          <tbody>
+            <tr><th>„Noch ein System, das keiner mitmacht"</th><td>Es ist per saldo eines <em>weniger</em>. Ein Handgriff pro Stunde, ein A4-Blatt pro Woche, 20 Minuten Einführung. Start freiwillig.</td></tr>
+            <tr><th>„Belohnungen verderben die Motivation"</th><td>In Kapitel 5 mit vier konkreten Konsequenzen verarbeitet, die alle im Konzept stehen.</td></tr>
+            <tr><th>Verstärkersättigung</th><td>Feste Nachverhandlung des Menüs nach acht Wochen.</td></tr>
+            <tr><th>Regel-Drift</th><td>Fünfminütiger Refresher alle vier Wochen, fester TOP im Jahrgangsteam.</td></tr>
+            <tr><th>Widersprüchliche Logiken</th><td>Abgrenzungstabelle als A4-Blatt in Klassenraum und Lehrerzimmer.</td></tr>
+            <tr><th>Konflikt am Zeitfresser-Strahl</th><td>Rückfallposition steht ausformuliert daneben — es wäre schade, das ganze Konzept an einem Zahlenstrahl scheitern zu lassen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section id="k13">
+      <div class="h2num">Kapitel 13</div>
+      <h2>Beschlussvorschlag</h2>
+      <div class="strahl"></div>
+      <p class="lead">Die Konferenz möge beschließen:</p>
+
+      <ol class="beschluss">
+        <li>Im Jahrgang 5/6 wird ab <span class="platzhalter">Termin</span> das Verhaltenskonzept „Zeit gewinnen statt Zeit verlieren" für zunächst <b>ein Halbjahr</b> erprobt.</li>
+        <li>Das <b>KlasseKinderSpiel</b> wird als Verfahren zur Vergabe von Zeitsparer-Minuten eingeführt. Die Teilnahme ist im ersten Halbjahr für Fachlehrkräfte <b>freiwillig</b>.</li>
+        <li>Der <b>individuelle Zeitfresser-Strahl entfällt</b>; sein Zielverhalten geht in die Spielregeln über.<span class="alt">Alternativ: Der Zeitfresser-Strahl bleibt in der entschärften Fassung nach Baustein 2.</span></li>
+        <li>Die <b>Ampel</b> wird um ein neutrales Startfeld ergänzt und nicht mehr offen einsehbar geführt. Am Auszeitraum ändert sich nichts.<span class="alt">Ergänzend zur Abstimmung: Reset zu jeder Stunde statt pro Tag.</span></li>
+        <li><b>Individuelle Verhaltensvereinbarungen</b> werden auf Beschluss des Klassenteams, befristet auf sechs Wochen und in Absprache mit den Eltern eingesetzt.</li>
+        <li>Nichts aus diesem System fließt in <b>Leistungsbewertung oder Zeugnisbemerkungen</b> ein.</li>
+        <li>Vor der Einführung werden <b>Baseline-Daten</b> erhoben und das Konzept der <b>Datenschutzbeauftragten</b> zur Prüfung vorgelegt.</li>
+        <li>Nach sechs Wochen und nach einem Halbjahr wird <b>evaluiert</b> und über Fortführung sowie eine mögliche Ausweitung auf Jahrgang 7–10 entschieden.</li>
+      </ol>
+    </section>
+
+    <!-- 14 -->
+    <section id="k14">
+      <div class="h2num">Kapitel 14</div>
+      <h2>Quellen</h2>
+      <div class="strahl"></div>
+      <p class="lead">Für die Konferenz genügen die ersten fünf. Der Rest ist Beleg für Rückfragen.</p>
+
+      <div class="quelle">
+        <div class="zit"><b>Korpershoek, H., de Boer, H. &amp; Mouw, J. M. (2025).</b> An Update of the Meta-Analysis of the Effects of Classroom Management Interventions. <i>Review of Educational Research.</i> <a href="https://journals.sagepub.com/doi/10.3102/00346543251361903">DOI 10.3102/00346543251361903</a></div>
+        <div class="was">76 kontrollierte Studien, Hedges' g = .23. Die Zahl, mit der wir arbeiten.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>Hillenbrand, C. &amp; Pütz, K. (2008).</b> <i>KlasseKinderSpiel. Spielerisch Verhaltensregeln lernen.</i> Körber-Stiftung. <a href="https://www.gruene-liste-praevention.de/nano.cms/datenbank/programm/34">Grüne Liste Prävention</a></div>
+        <div class="was">Deutsche GBG-Adaption, extern geprüfte Programmqualität. Unser Kernbaustein.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>Deci, E. L., Koestner, R. &amp; Ryan, R. M. (2001).</b> Extrinsic Rewards and Intrinsic Motivation in Education: Reconsidered Once Again. <i>Review of Educational Research, 71</i>(1). <a href="https://www.selfdeterminationtheory.org/SDT/documents/2001_DeciKoestnerRyan.pdf">PDF</a></div>
+        <div class="was">Die schulbezogene Fassung des Untergrabungseffekts. Für die Konferenzdiskussion die nützlichere der beiden Arbeiten.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>§ 53 SchulG NRW</b> — Erzieherische Einwirkungen, Ordnungsmaßnahmen. <a href="https://recht.nrw.de/lmi/owa/br_bes_detail?sg=0&amp;menu=0&amp;bes_id=7345&amp;anw_nr=2&amp;aufgehoben=N&amp;det_id=703720">Gesetzestext</a></div>
+        <div class="was">Grundlage für das Verbot, einzelne Kinder von Klassenbelohnungen auszuschließen.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>VO-DV I</b>, Anlage 3 — zugelassene Daten. <a href="https://datenschutz-schule.info/category/nrw/logineo-nrw/">Einordnung</a></div>
+        <div class="was">Verhaltensdaten sind nicht gelistet. Grundlage der Trennung analog/digital.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>Deci, Koestner &amp; Ryan (1999).</b> <i>Psychological Bulletin, 125</i>(6), 627–668. <a href="https://depts.washington.edu/techdocs/papers/deciExtrinsicRewardsAndIntrinsicMotivation99.pdf">PDF</a> · <b>Smith et al. (2019/2021).</b> GBG-Metaanalyse randomisierter Studien. <i>Behavior Modification, 45</i>(4). <a href="https://pubmed.ncbi.nlm.nih.gov/31578077/">PubMed</a> · <b>Soares et al. (2016).</b> <i>School Psychology Review, 45</i>(4), 379–399. <a href="https://www.tandfonline.com/doi/full/10.17105/SPR45-4.379-399">Volltext</a> · <b>Kim et al. (2021).</b> <a href="https://pubmed.ncbi.nlm.nih.gov/34784784/">PubMed</a></div>
+        <div class="was">Vertiefung zu Motivation, GBG-Wirksamkeit und Token Economies.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>Praise-to-Reprimand-Ratios.</b> <a href="https://files.eric.ed.gov/fulltext/ED606564.pdf">ERIC ED606564</a> · <b>Daily Report Card.</b> <i>School Mental Health</i> (2020). <a href="https://link.springer.com/article/10.1007/s12310-020-09375-w">Springer</a> · <b>QUA-LiS NRW,</b> Referenzkarte Classroom Management. <a href="https://www.qua-lis.nrw.de/system/files/media/document/file/lep_cm_10_unangemessenes_schlerverhalten_unterbinden.pdf">PDF</a></div>
+        <div class="was">Belege zu Baustein 0, Baustein 3 und zur Anbindung an NRW-Landesmaterial.</div>
+      </div>
+      <div class="quelle">
+        <div class="zit"><b>Bründel, H. &amp; Simon, E. (2003).</b> <i>Die Trainingsraum-Methode.</i> Beltz · Kritische Einordnung: <a href="https://edoc.hu-berlin.de/bitstreams/509ee355-2777-4061-957c-2a421f9eced2/download">Hövel (HU Berlin)</a>, <a href="https://www.researchgate.net/publication/321707219">„Trainingsraum Kritik"</a></div>
+        <div class="was">Ursprungsdarstellung und Fachkritik. Verwendung ausschließlich als Begründung für die präventive Ebene.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Verhaltenskonzept Jahrgang 5/6 · Gesamtschule NRW</span>
+    <span>Stand: <span class="platzhalter">Datum</span></span>
+    <span>Markierte Felder vor der Konferenz ausfüllen</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) map[id] = a;
+  });
+  var ids = Object.keys(map);
+  if (!ids.length || !('IntersectionObserver' in window)) return;
+
+  var sichtbar = {};
+  var obs = new IntersectionObserver(function(eintraege){
+    eintraege.forEach(function(e){ sichtbar[e.target.id] = e.isIntersecting; });
+    var aktiv = null;
+    for (var i = 0; i < ids.length; i++){
+      if (sichtbar[ids[i]]) { aktiv = ids[i]; break; }
+    }
+    links.forEach(function(a){ a.classList.remove('aktiv'); });
+    if (aktiv && map[aktiv]) map[aktiv].classList.add('aktiv');
+  }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+
+  ids.forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+
+</body>
+</html>
