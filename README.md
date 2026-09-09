@@ -3,7 +3,7 @@
 Gesamtschule NRW · Konferenzvorlage, Einführungsfahrplan und druckfertiges Material.
 Die Unterlagen liegen zusätzlich als Website vor, damit Kollegium und Eltern sie ohne Dateidownload öffnen können.
 
-**Website:** _wird nach dem ersten Deploy hier eingetragen_
+**Website: https://ryze-o.github.io/verhaltenskonzept-5-6/**
 
 ## Der Kern in drei Sätzen
 
